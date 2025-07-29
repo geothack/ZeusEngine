@@ -1,18 +1,9 @@
-#include <print>
 
-#include "Windows/ZWindow.h"
+#include "ZApplication.h"
 
 int main()
 {
-    std::println("Hello World");
+    auto game = ZApplication();
 
-    auto gameWindow = ZWindow("Game", 800, 600);
-
-    while (true)
-    {
-        gameWindow.Events();
-
-
-        gameWindow.SwapBuffers();
-    }
+    game.Update();
 }

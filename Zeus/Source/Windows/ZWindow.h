@@ -25,20 +25,20 @@ public:
 
 	void SwapBuffers() const;
 
-	GLFWwindow* const Get() const { return m_PlatformWindow; }
+	GLFWwindow* const Get() const { return z_PlatformWindow; }
 
-	const GLFWvidmode* GetVideoMode() const { return m_VideoMode; }
+	const GLFWvidmode* GetVideoMode() const { return z_VideoMode; }
 
-	static Size GetSize() { return m_WindowSize; }
+	static Size GetSize() { return z_WindowSize; }
 
 private:
 	static void FramebufferSizeCallback(GLFWwindow* window, int width, int height);
 	static void APIENTRY DebugLog(GLenum source, GLenum type, unsigned int id, GLenum severity, GLsizei length, const char* message, const void* userParam);
 
 private:
-	GLFWwindow* m_PlatformWindow;
-	const GLFWvidmode* m_VideoMode;
+	GLFWwindow* z_PlatformWindow;
+	const GLFWvidmode* z_VideoMode;
 
-	inline static Size m_WindowSize = {};
+	inline static Size z_WindowSize = {};
 };
 

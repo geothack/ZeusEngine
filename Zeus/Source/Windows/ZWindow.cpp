@@ -28,14 +28,14 @@ ZWindow::ZWindow(std::string_view title, const int width, const int height)
 		//Error error("Glfw failed to initialize");
 	}
 
-	m_PlatformWindow = glfwCreateWindow(width, height, title.data(), nullptr, nullptr);
+	z_PlatformWindow = glfwCreateWindow(width, height, title.data(), nullptr, nullptr);
 
-	if (!m_PlatformWindow)
+	if (!z_PlatformWindow)
 	{
 		//Error error("Glfw failed to create window");
 	}
 
-	glfwMakeContextCurrent(m_PlatformWindow);
+	glfwMakeContextCurrent(z_PlatformWindow);
 
 	/*if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
 	{
@@ -49,23 +49,23 @@ ZWindow::ZWindow(std::string_view title, const int width, const int height)
 		glfwTerminate();
 	}
 
-	m_VideoMode = glfwGetVideoMode(monitor);
-	if (!m_VideoMode)
+	z_VideoMode = glfwGetVideoMode(monitor);
+	if (!z_VideoMode)
 	{
 		//Error error("Failed to get video mode");
 		glfwTerminate();
 	}
 
 	//glfwSetKeyCallback(mPlatformWindow, Keyboard::KeyCallback);
-	glfwSetFramebufferSizeCallback(m_PlatformWindow, FramebufferSizeCallback);
+	glfwSetFramebufferSizeCallback(z_PlatformWindow, FramebufferSizeCallback);
 	//glfwSetCursorPosCallback(mPlatformWindow, CursorPosCallback);
 	//glfwSetMouseButtonCallback(mPlatformWindow, MouseButtonCallback);
 	//glfwSetScrollCallback(mPlatformWindow, MouseWheelCallback);
 
 	glfwSwapInterval(1);
 
-	m_WindowSize.Width = width;
-	m_WindowSize.Height = height;
+	z_WindowSize.Width = width;
+	z_WindowSize.Height = height;
 
 	//glEnable(GL_DEBUG_OUTPUT);
 	//glDebugMessageCallback(DebugLog, nullptr);
@@ -73,7 +73,7 @@ ZWindow::ZWindow(std::string_view title, const int width, const int height)
 
 ZWindow::~ZWindow()
 {
-	glfwDestroyWindow(m_PlatformWindow);
+	glfwDestroyWindow(z_PlatformWindow);
 	glfwTerminate();
 }
 
@@ -89,13 +89,13 @@ void ZWindow::Events() const
 
 void ZWindow::SwapBuffers() const
 {
-	glfwSwapBuffers(m_PlatformWindow);
+	glfwSwapBuffers(z_PlatformWindow);
 }
 
 void ZWindow::FramebufferSizeCallback(GLFWwindow* window, int width, int height)
 {
-	m_WindowSize.Width = width;
-	m_WindowSize.Height = height;
+	z_WindowSize.Width = width;
+	z_WindowSize.Height = height;
 	//glViewport(0, 0, width, height);
 }
 
