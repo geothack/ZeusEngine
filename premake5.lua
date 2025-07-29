@@ -102,6 +102,7 @@ project "Zeus"
     includedirs 
     { 
         "Zeus/Dependencies/Glfw/Include", 
+        "Dependencies/Glad/Include",
     }
 
     libdirs 
@@ -115,6 +116,7 @@ project "Zeus"
     {
        "glfw3.dll",
        "glfw3.lib",
+       "Glad",
     }
 
 
@@ -126,3 +128,24 @@ project "Zeus"
       buildoptions { "/MP" }
 
 
+
+project "Glad"
+    kind "StaticLib"
+
+    language "C++"
+    cppdialect "C++latest"
+    targetdir "bin/%{cfg.buildcfg}"
+
+    architecture ("x64")
+
+
+    files
+    { 
+      "Dependencies/Glad/**.h", 
+      "Dependencies/Glad/**.c", 
+    }
+
+    includedirs 
+    { 
+        "Dependencies/Glad/Include", 
+    }
