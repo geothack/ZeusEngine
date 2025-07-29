@@ -15,8 +15,8 @@ project "Game"
 
     includedirs 
     { 
-        --"deps/glfw/include", 
-        --"src", 
+        "Zeus/Source", 
+        "Zeus/Dependencies/Glfw/Include", 
         
     }
 
@@ -101,7 +101,28 @@ project "Zeus"
 
     includedirs 
     { 
-        --"deps/glfw/include", 
+        "Zeus/Dependencies/Glfw/Include", 
     }
+
+    libdirs 
+    {
+       "Zeus/Dependencies/Glfw/Library", 
+       --"deps/assimp/lib", 
+       
+    }
+
+    links
+    {
+       "glfw3.dll",
+       "glfw3.lib",
+    }
+
+
+    postbuildcommands { "{COPY} Zeus/Dependencies/Glfw/Library/glfw3.dll bin/Debug" }
+
+       filter "configurations:Debug"
+      defines { "DEBUG" }
+      symbols "On"
+      buildoptions { "/MP" }
 
 
