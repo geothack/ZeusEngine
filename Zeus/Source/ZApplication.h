@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Windows/ZWindow.h"
+#include "Render/Models/ZBox.h"
 #include "Render/Models/ZCube.h"
 #include "Render/Models/ZPlane.h"
 #include "Render/Models/ZSphere.h"
@@ -31,11 +32,11 @@ private:
 
 	ZPlane z_Plane{};
 
-	ZShader z_TrollShader{};
-	ZModel z_Troll{};
-
 	ZShader z_ShipShader{};
 	ZModel z_Ship{};
+
+	ZShader z_BoxesShader{};
+	ZBox z_Boxes{};
 
 };
 
