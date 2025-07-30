@@ -16,10 +16,17 @@ void ZApplication::Update()
     //Log::Info(std::filesystem::current_path().string());
 
     z_BasicShader = ZShader("Zeus/Resource/Shaders/Basic3d.vert", "Zeus/Resource/Shaders/Basic3d.frag");
+    z_LightShader = ZShader("Zeus/Resource/Shaders/Light.vert", "Zeus/Resource/Shaders/Light.frag");
     z_TrollShader = ZShader("Zeus/Resource/Shaders/Troll.vert", "Zeus/Resource/Shaders/Troll.frag");
+
+    z_Sphere = ZSphere(ZTransform(Vec3(-5.0,0.0,0.0), Vec3(0), Vec3(0.05f)));
+    z_Sphere.Init();
 
     z_BasicCube = ZCube(ZTransform(Vec3(0.0),Vec3(45,0,0)));
     z_BasicCube.Init();
+
+    z_Plane = ZPlane(ZTransform(Vec3(0,-12,-25)));
+    z_Plane.Init();
 
     z_Troll.Load("Zeus/Resource/Models/Troll", "scene.gltf");
 
@@ -47,7 +54,15 @@ void ZApplication::Update()
         z_TrollShader.SetMat4("Projection", projection);
         z_TrollShader.SetMat4("View", view);
         z_Troll.Render(z_TrollShader);
+
+
+        z_LightShader.Attach();
+        z_LightShader.SetMat4("Projection", projection);
+        z_LightShader.SetMat4("View", view);
+        z_Sphere.Render(z_LightShader);
         
+
+        z_Plane.Render(z_LightShader);
 
         gameWindow.SwapBuffers();
     }
