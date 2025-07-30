@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Windows/ZWindow.h"
+#include "Render/ZShader.h"
 
 class ZApplication
 {
@@ -11,6 +12,8 @@ public:
 	void Update();
 
 private:
+
+	ZShader z_BasicShader{}; 
 };
 
 

@@ -18,6 +18,9 @@ project "Game"
         "Zeus/Source", 
         "Zeus/Dependencies/Glfw/Include", 
         "Dependencies/Glad/Include",
+        "Dependencies/Glm/Include",
+        "Dependencies/Assimp/Include", 
+        "Dependencies/Stb/Include", 
         
     }
 
@@ -60,7 +63,7 @@ project "Game"
       }
 
       --postbuildcommands { "{COPY} deps/glfw/lib/glfw3.dll bin/Debug" }
-      --postbuildcommands { "{COPY} deps/assimp/lib/assimp-vc143-mtd.dll bin/Debug" }
+      --postbuildcommands { "{COPY} Dependencies/Assimp/Library/assimp-vc143-mtd.dll bin/Debug" }
       --postbuildcommands { "{COPY} deps/openal/lib/OpenAL32.dll bin/Debug" }
 
    filter "configurations:Release"
@@ -104,12 +107,15 @@ project "Zeus"
         "Zeus/Dependencies/Glfw/Include", 
         "Dependencies/Glad/Include",
         "Zeus/Source",
+        "Dependencies/Glm/Include",
+        "Dependencies/Assimp/Include", 
+        "Dependencies/Stb/Include", 
     }
 
     libdirs 
     {
        "Zeus/Dependencies/Glfw/Library", 
-       --"deps/assimp/lib", 
+       "Dependencies/Assimp/Library", 
        
     }
 
@@ -118,6 +124,8 @@ project "Zeus"
        "glfw3.dll",
        "glfw3.lib",
        "Glad",
+       "Stb",
+       
     }
 
 
@@ -126,17 +134,35 @@ project "Zeus"
 
 
     postbuildcommands { "{COPY} Zeus/Dependencies/Glfw/Library/glfw3.dll bin/Debug" }
+    postbuildcommands { "{COPY} Dependencies/Assimp/Library/assimp-vc143-mtd.dll bin/Debug" }
 
        filter "configurations:Debug"
       defines { "DEBUG" }
       symbols "On"
       buildoptions { "/MP" }
 
+      links 
+      {
+          "assimp-vc143-mtd.lib",
+          "assimp-vc143-mtd.dll",
+          --"freetyped.lib",
+          --"box2dd.lib",
+      }
+
 
       filter "configurations:Release"
       defines { "NDEBUG" }
       optimize "On"
       buildoptions { "/MP" }
+
+
+      links 
+      {
+          "assimp-vc143-mt.lib",
+          "assimp-vc143-mt.dll",
+          --"freetype.lib",
+          --"rbox2d.lib",
+      }
 
 
 
@@ -188,8 +214,8 @@ project "Stb"
 
     files
     { 
-      --"Dependencies/Glad/**.h", 
-      --"Dependencies/Glad/**.c", 
+      "Dependencies/Stb/**.h", 
+      "Dependencies/Stb/**.c", 
     }
 
 
@@ -204,31 +230,3 @@ project "Stb"
       optimize "On"
       buildoptions { "/MP" }
 
-
-project "Glfw"
-    kind "StaticLib"
-
-    language "C++"
-    cppdialect "C++latest"
-    targetdir "bin/%{cfg.buildcfg}"
-
-    architecture ("x64")
-
-
-    files
-    { 
-      --"Dependencies/Glad/**.h", 
-      --"Dependencies/Glad/**.c", 
-    }
-
-
-     filter "configurations:Debug"
-      defines { "DEBUG" }
-      symbols "On"
-      buildoptions { "/MP" }
-
-
-      filter "configurations:Release"
-      defines { "NDEBUG" }
-      optimize "On"
-      buildoptions { "/MP" }

@@ -1,5 +1,6 @@
 #include "Core/CoreLibrary.h"
 #include "ZWindow.h"
+#include "Core/Error.h"
 
 namespace {
 
@@ -26,34 +27,34 @@ ZWindow::ZWindow(std::string_view title, const int width, const int height)
 
 	if (success == 0)
 	{
-		//Error error("Glfw failed to initialize");
+		Error error("Glfw failed to initialize");
 	}
 
 	z_PlatformWindow = glfwCreateWindow(width, height, title.data(), nullptr, nullptr);
 
 	if (!z_PlatformWindow)
 	{
-		//Error error("Glfw failed to create window");
+		Error error("Glfw failed to create window");
 	}
 
 	glfwMakeContextCurrent(z_PlatformWindow);
 
-	/*if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
+	if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
 	{
 		Error error("Failed to initialize glad");
-	}*/
+	}
 
 	GLFWmonitor* monitor = glfwGetPrimaryMonitor();
 	if (!monitor)
 	{
-		//Error error("Failed to get primary monitor");
+		Error error("Failed to get primary monitor");
 		glfwTerminate();
 	}
 
 	z_VideoMode = glfwGetVideoMode(monitor);
 	if (!z_VideoMode)
 	{
-		//Error error("Failed to get video mode");
+		Error error("Failed to get video mode");
 		glfwTerminate();
 	}
 
@@ -68,8 +69,8 @@ ZWindow::ZWindow(std::string_view title, const int width, const int height)
 	z_WindowSize.Width = width;
 	z_WindowSize.Height = height;
 
-	//glEnable(GL_DEBUG_OUTPUT);
-	//glDebugMessageCallback(DebugLog, nullptr);
+	glEnable(GL_DEBUG_OUTPUT);
+	glDebugMessageCallback(DebugLog, nullptr);
 }
 
 ZWindow::~ZWindow()
@@ -102,7 +103,7 @@ void ZWindow::FramebufferSizeCallback(GLFWwindow* window, int width, int height)
 
 void ZWindow::DebugLog(GLenum source, GLenum type, unsigned int id, GLenum severity, GLsizei length, const char* message, const void* userParam)
 {
-	/*switch (severity)
+	switch (severity)
 	{
 	case GL_DEBUG_SEVERITY_HIGH:
 		std::println("OpenGL High {}", message);
@@ -123,5 +124,5 @@ void ZWindow::DebugLog(GLenum source, GLenum type, unsigned int id, GLenum sever
 	default:
 
 		break;
-	}*/
+	}
 }
