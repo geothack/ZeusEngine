@@ -45,11 +45,29 @@ ZMesh::ZMesh(const std::vector<Vertex>& vertices, const std::vector<uint32_t>& i
 
 void ZMesh::Render(ZShader& shader)
 {
-	for (size_t i = 0; i < z_Textures.size(); i++)
+	if (z_Textures.size() >= 1)
 	{
-		shader.Attach();
-		shader.SetInt(z_Textures[i].GetName(), i);
-		glBindTextureUnit(i, z_Textures[i].GetHandle());
+		uint32_t diffuse = 0;
+		uint32_t specular = 0;
+		for (size_t i = 0; i < z_Textures.size(); i++)
+		{
+			glActiveTexture(GL_TEXTURE0 + i);
+
+			std::string name;
+			switch (z_Textures[i].GetType())
+			{
+			case aiTextureType_DIFFUSE:
+				name = "diffuse" + std::to_string(diffuse++);
+				break;
+
+			case aiTextureType_SPECULAR:
+				name = "specular" + std::to_string(specular++);
+				break;
+			}
+
+			shader.SetInt(name, i);
+			z_Textures[i].Attach();
+		}
 	}
 
 	z_ArrayObject.Attach();

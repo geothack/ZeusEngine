@@ -2,13 +2,13 @@
 #include "ZTexture.h"
 #include "Core/Error.h"
 
-ZTexture::ZTexture(std::string_view samplerName, const std::filesystem::path& path, bool flip)
+ZTexture::ZTexture(std::string_view samplerName, const std::filesystem::path& path, bool flip) : z_SamplerName(samplerName.data())
 {
 	glGenTextures(1, &z_Handle);
 	Load(path, flip);
 }
 
-ZTexture::ZTexture(const std::filesystem::path& directory, const std::filesystem::path& path, aiTextureType type)
+ZTexture::ZTexture(const std::filesystem::path& directory, const std::filesystem::path& path, aiTextureType type) : z_Dir(directory), z_Path(path), z_Type(type)
 {
 	glGenTextures(1, &z_Handle);
 	Load((z_Dir.string() + "/" + path.string()).c_str());

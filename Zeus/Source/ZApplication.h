@@ -18,6 +18,9 @@ private:
 	ZShader z_BasicShader{}; 
 	ZCube z_BasicCube{};
 
+	ZShader z_TrollShader{};
+	ZModel z_Troll{};
+
 };
 
 
