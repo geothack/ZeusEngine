@@ -39,6 +39,8 @@ void ZApplication::Update()
     glfwSetInputMode(gameWindow.Get(), GLFW_CURSOR, GLFW_CURSOR_HIDDEN);
     glfwSetInputMode(gameWindow.Get(), GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 
+    glEnable(GL_DEPTH_TEST);
+
     while (!glfwWindowShouldClose(gameWindow.Get()))
     {
         gameWindow.Events();
@@ -91,12 +93,12 @@ void ZApplication::Update()
             z_GameCamera.MoveUp(-1.0f);
         }
 
-        auto dx = ZInput->GetMouse().GetDX();
+        /*auto dx = ZInput->GetMouse().GetDX();
         auto dy = ZInput->GetMouse().GetDY();
         if (dx != 0 || dy != 0)
         {
             z_GameCamera.ProcessMouseMovement(dx, dy);
-        }
+        }*/
 
         gameWindow.SwapBuffers();
     }

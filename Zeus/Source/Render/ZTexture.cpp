@@ -2,7 +2,7 @@
 #include "ZTexture.h"
 #include "Core/Error.h"
 
-ZTexture::ZTexture(std::string_view samplerName, const std::filesystem::path& path, bool flip) : z_SamplerName(samplerName.data())
+ZTexture::ZTexture(std::string_view samplerName, const std::filesystem::path& path, bool flip) : z_SamplerName(samplerName.data()), z_Path(path)
 {
 	glGenTextures(1, &z_Handle);
 	Load(path, flip);
