@@ -23,8 +23,11 @@
 #include <filesystem>
 #include <memory>
 #include <unordered_map>
+#include <map>
+#include <vector>
 
 // Created Classes
 #include "Core/Log.h"
 #include "Core/Core.h"
-//#include "stb_image.h"
+#include "stb_image.h"
+

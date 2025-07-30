@@ -80,9 +80,6 @@ project "Game"
           --"rbox2d.lib",
       }
 
-    filter "files:**.c"
-      flags { "NoPCH" }
-
       --postbuildcommands { "{COPY} libs/sdl3/lib/x64/SDL3.dll bin/Release" }
       --postbuildcommands { "{COPY} libs/openal/libs/OpenAL32.dll bin/Release" }
 
@@ -99,7 +96,8 @@ project "Zeus"
     files
     { 
       "Zeus/Source/**.h", 
-      "Zeus/Source/**.cpp"
+      "Zeus/Source/**.cpp",
+      "Dependencies/Stb/**.c"
     }
 
     includedirs 
@@ -124,7 +122,7 @@ project "Zeus"
        "glfw3.dll",
        "glfw3.lib",
        "Glad",
-       "Stb",
+       
        
     }
 
@@ -135,6 +133,9 @@ project "Zeus"
 
     postbuildcommands { "{COPY} Zeus/Dependencies/Glfw/Library/glfw3.dll bin/Debug" }
     postbuildcommands { "{COPY} Dependencies/Assimp/Library/assimp-vc143-mtd.dll bin/Debug" }
+
+    filter "files:**.c"
+      flags { "NoPCH" }
 
        filter "configurations:Debug"
       defines { "DEBUG" }
@@ -201,32 +202,4 @@ project "Glad"
 
 
 
-
-project "Stb"
-    kind "StaticLib"
-
-    language "C++"
-    cppdialect "C++latest"
-    targetdir "bin/%{cfg.buildcfg}"
-
-    architecture ("x64")
-
-
-    files
-    { 
-      "Dependencies/Stb/**.h", 
-      "Dependencies/Stb/**.c", 
-    }
-
-
-     filter "configurations:Debug"
-      defines { "DEBUG" }
-      symbols "On"
-      buildoptions { "/MP" }
-
-
-      filter "configurations:Release"
-      defines { "NDEBUG" }
-      optimize "On"
-      buildoptions { "/MP" }
 

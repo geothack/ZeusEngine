@@ -1,7 +1,9 @@
 #pragma once
 
 #include "Windows/ZWindow.h"
+#include "Render/Models/ZCube.h"
 #include "Render/ZShader.h"
+#include "World/ZTransform.h"
 
 class ZApplication
 {
@@ -14,6 +16,8 @@ public:
 private:
 
 	ZShader z_BasicShader{}; 
+	ZCube z_BasicCube{};
+
 };
 
 
