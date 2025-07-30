@@ -4,20 +4,20 @@
 
 namespace {
 
-	/*void CursorPosCallback(GLFWwindow* window, double _x, double _y)
+	void CursorPosCallback(GLFWwindow* window, double _x, double _y)
 	{
-		GInput->GetMouse().SetPosition(_x, _y);
+		ZInput->GetMouse().SetPosition(_x, _y);
 	}
 
 	void MouseButtonCallback(GLFWwindow* window, int button, int action, int mods)
 	{
-		GInput->GetMouse().SetButtons(button, action);
+		ZInput->GetMouse().SetButtons(button, action);
 	}
 
 	void MouseWheelCallback(GLFWwindow* window, double dx, double dy)
 	{
-		GInput->GetMouse().SetWheel(dx, dy);
-	}*/
+		ZInput->GetMouse().SetWheel(dx, dy);
+	}
 
 }
 
@@ -58,11 +58,11 @@ ZWindow::ZWindow(std::string_view title, const int width, const int height)
 		glfwTerminate();
 	}
 
-	//glfwSetKeyCallback(mPlatformWindow, Keyboard::KeyCallback);
+	glfwSetKeyCallback(z_PlatformWindow, ZKeyboard::KeyCallback);
 	glfwSetFramebufferSizeCallback(z_PlatformWindow, FramebufferSizeCallback);
-	//glfwSetCursorPosCallback(mPlatformWindow, CursorPosCallback);
-	//glfwSetMouseButtonCallback(mPlatformWindow, MouseButtonCallback);
-	//glfwSetScrollCallback(mPlatformWindow, MouseWheelCallback);
+	glfwSetCursorPosCallback(z_PlatformWindow, CursorPosCallback);
+	glfwSetMouseButtonCallback(z_PlatformWindow, MouseButtonCallback);
+	glfwSetScrollCallback(z_PlatformWindow, MouseWheelCallback);
 
 	glfwSwapInterval(1);
 
@@ -83,10 +83,10 @@ void ZWindow::Events() const
 {
 	glfwPollEvents();
 
-	/*if (GInput->KeyWentDown(GLFW_KEY_ESCAPE))
+	if (ZInput->KeyWentDown(GLFW_KEY_ESCAPE))
 	{
-		glfwSetWindowShouldClose(m_PlatformWindow, true);
-	}*/
+		glfwSetWindowShouldClose(z_PlatformWindow, true);
+	}
 }
 
 void ZWindow::SwapBuffers() const

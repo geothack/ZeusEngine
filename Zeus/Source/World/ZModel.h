@@ -1,5 +1,6 @@
 #pragma once
 
+#include "Render/ZCamera.h"
 #include "Render/ZShader.h"
 #include "World/ZMesh.h"
 #include "World/ZTransform.h"
@@ -15,7 +16,7 @@ public:
 
 	void Load(const std::filesystem::path& directory, const std::filesystem::path& path);
 
-	void Render(ZShader& shader);
+	void Render(ZShader& shader, ZCamera& activeCamera);
 
 	void Free();
 

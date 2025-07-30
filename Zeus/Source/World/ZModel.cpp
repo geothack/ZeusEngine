@@ -30,14 +30,14 @@ void ZModel::Load(const std::filesystem::path& directory, const std::filesystem:
 	ProcessNode(scene->mRootNode, scene);
 }
 
-void ZModel::Render(ZShader& shader)
+void ZModel::Render(ZShader& shader, ZCamera& activeCamera)
 {
 	Mat4 model = Mat4(1.0);
 	Mat4 view = Mat4(1.0);
 	Mat4 projection = Mat4(1.0);
 
 	projection = glm::perspective(glm::radians(45.0f), (float)ZWindow::GetSize().Width / (float)ZWindow::GetSize().Height, 0.1f, 100.0f);
-	view = glm::translate(view, glm::vec3(0.0f, 0.0f, -10.0f));
+	view = activeCamera.GetViewMatrix();
 
 	model = glm::translate(model, z_Transform.GetPosition());
 	if (z_Transform.GetRotation() != Vec3(0.0))

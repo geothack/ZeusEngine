@@ -13,6 +13,8 @@ void ZApplication::Update()
 {
     auto gameWindow = ZWindow("Game", 800, 600);
 
+    z_GameCamera = ZCamera(Vec3(0, 0, 10));
+
     //Log::Info(std::filesystem::current_path().string());
 
     z_BasicShader = ZShader("Zeus/Resource/Shaders/Basic3d.vert", "Zeus/Resource/Shaders/Basic3d.frag");
@@ -26,7 +28,7 @@ void ZApplication::Update()
     z_BasicCube = ZCube(ZTransform(Vec3(0.0),Vec3(45,0,0)));
     z_BasicCube.Init();
 
-    z_Plane = ZPlane(ZTransform(Vec3(0,-12,-25)));
+    z_Plane = ZPlane(ZTransform(Vec3(0,-5,0)));
     z_Plane.Init();
 
     z_Troll = ZModel(ZTransform(Vec3(5, 0, 0),Vec3(0.0),Vec3(0.0127f)));
@@ -34,23 +36,67 @@ void ZApplication::Update()
     z_Ship = ZModel(ZTransform(Vec3(2.5, 2, 0),Vec3(1.0)));
     z_Ship.Load("Zeus/Resource/Models/SpaceShip", "scene.gltf");
 
-    while (true)
+    glfwSetInputMode(gameWindow.Get(), GLFW_CURSOR, GLFW_CURSOR_HIDDEN);
+    glfwSetInputMode(gameWindow.Get(), GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+
+    while (!glfwWindowShouldClose(gameWindow.Get()))
     {
         gameWindow.Events();
+
+        double currentTime = glfwGetTime();
+        z_DeltaTime = currentTime - z_LastFrame;
+        z_LastFrame = currentTime;
 
         glClearColor(0.33, 0.33, 0.33, 1.0);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 
-        z_BasicCube.Render(z_BasicShader);
+        z_BasicCube.Render(z_BasicShader, z_GameCamera);
 
-        z_Troll.Render(z_TrollShader);
+        z_Troll.Render(z_TrollShader, z_GameCamera);
 
-        z_Sphere.Render(z_LightShader);
+        z_Sphere.Render(z_LightShader, z_GameCamera);
 
-        z_Ship.Render(z_ShipShader);
+        z_Ship.Render(z_ShipShader, z_GameCamera);
 
-        z_Plane.Render(z_LightShader);
+        z_Plane.Render(z_LightShader, z_GameCamera);
+
+        if (ZInput->Key(GLFW_KEY_A))
+        {
+            z_GameCamera.MoveLeft(-1.0f);
+        }
+
+        if (ZInput->Key(GLFW_KEY_D))
+        {
+            z_GameCamera.MoveLeft(1.0f);
+        }
+
+        if (ZInput->Key(GLFW_KEY_W))
+        {
+            z_GameCamera.MoveForward(-1.0f);
+        }
+
+        if (ZInput->Key(GLFW_KEY_S))
+        {
+            z_GameCamera.MoveForward(1.0f);
+        }
+
+        if (ZInput->Key(GLFW_KEY_SPACE))
+        {
+            z_GameCamera.MoveUp(1.0f);
+        }
+
+        if (ZInput->Key(GLFW_KEY_LEFT_SHIFT))
+        {
+            z_GameCamera.MoveUp(-1.0f);
+        }
+
+        auto dx = ZInput->GetMouse().GetDX();
+        auto dy = ZInput->GetMouse().GetDY();
+        if (dx != 0 || dy != 0)
+        {
+            z_GameCamera.ProcessMouseMovement(dx, dy);
+        }
 
         gameWindow.SwapBuffers();
     }

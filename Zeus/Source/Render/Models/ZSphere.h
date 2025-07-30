@@ -18,8 +18,8 @@ public:
 		Load("Zeus/Resource/Models/Sphere", "scene.gltf");
 	}
 
-	void Render(ZShader& shader)
+	void Render(ZShader& shader, ZCamera& activeCamera)
 	{
-		ZModel::Render(shader);
+		ZModel::Render(shader, activeCamera);
 	}
 };

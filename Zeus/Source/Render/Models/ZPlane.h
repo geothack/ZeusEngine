@@ -40,9 +40,9 @@ public:
         z_Meshes.emplace_back(ZMesh(Vertex::GenerateList(vertices, numOfVertices), indices));
 	}
 
-	void Render(ZShader& shader)
+	void Render(ZShader& shader, ZCamera& activeCamera)
 	{
-		ZModel::Render(shader);
+		ZModel::Render(shader, activeCamera);
 	}
 
 };
