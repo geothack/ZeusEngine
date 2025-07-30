@@ -1,8 +1,13 @@
 #include "Core/CoreLibrary.h"
 #include "ZModel.h"
 #include "Core/Error.h"
+#include "Windows/ZWindow.h"
 
 ZModel::ZModel()
+{
+}
+
+ZModel::ZModel(const ZTransform& transform) : z_Transform(transform)
 {
 }
 
@@ -27,6 +32,25 @@ void ZModel::Load(const std::filesystem::path& directory, const std::filesystem:
 
 void ZModel::Render(ZShader& shader)
 {
+	Mat4 model = Mat4(1.0);
+	Mat4 view = Mat4(1.0);
+	Mat4 projection = Mat4(1.0);
+
+	projection = glm::perspective(glm::radians(45.0f), (float)ZWindow::GetSize().Width / (float)ZWindow::GetSize().Height, 0.1f, 100.0f);
+	view = glm::translate(view, glm::vec3(0.0f, 0.0f, -10.0f));
+
+	model = glm::translate(model, z_Transform.GetPosition());
+	if (z_Transform.GetRotation() != Vec3(0.0))
+	{
+		model = glm::rotate(model, static_cast<float>(45.0f * glfwGetTime() * 0.01), Vec3(1, 1, 0));
+	}
+	model = glm::scale(model, z_Transform.GetScale());
+
+	shader.Attach();
+	shader.SetMat4("Model", model);
+	shader.SetMat4("View", view);
+	shader.SetMat4("Projection", projection);
+
 	for (auto& zMesh : z_Meshes)
 	{
 		zMesh.Render(shader);
@@ -139,7 +163,6 @@ std::vector<ZTexture> ZModel::LoadTextures(aiMaterial* material, aiTextureType t
 			{
 				textures.push_back(z_Textures[j]);
 				skip = true;
-				break;
 			}
 		}
 

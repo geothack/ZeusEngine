@@ -2,12 +2,14 @@
 
 #include "Render/ZShader.h"
 #include "World/ZMesh.h"
+#include "World/ZTransform.h"
 
 
 class ZModel
 {
 public:
 	ZModel();
+	ZModel(const ZTransform& transform);
 
 	void Init();
 
@@ -29,6 +31,8 @@ protected:
 	std::vector<ZTexture> z_Textures;
 
 	std::filesystem::path z_Directory{};
+
+	ZTransform z_Transform;
 
 };
 

@@ -28,6 +28,9 @@ private:
 	ZShader z_TrollShader{};
 	ZModel z_Troll{};
 
+	ZShader z_ShipShader{};
+	ZModel z_Ship{};
+
 };
 
 

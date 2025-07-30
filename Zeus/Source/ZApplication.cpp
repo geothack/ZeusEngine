@@ -18,6 +18,7 @@ void ZApplication::Update()
     z_BasicShader = ZShader("Zeus/Resource/Shaders/Basic3d.vert", "Zeus/Resource/Shaders/Basic3d.frag");
     z_LightShader = ZShader("Zeus/Resource/Shaders/Light.vert", "Zeus/Resource/Shaders/Light.frag");
     z_TrollShader = ZShader("Zeus/Resource/Shaders/Troll.vert", "Zeus/Resource/Shaders/Troll.frag");
+    z_ShipShader = ZShader("Zeus/Resource/Shaders/Troll.vert", "Zeus/Resource/Shaders/Troll.frag");
 
     z_Sphere = ZSphere(ZTransform(Vec3(-5.0,0.0,0.0), Vec3(0), Vec3(0.05f)));
     z_Sphere.Init();
@@ -28,7 +29,10 @@ void ZApplication::Update()
     z_Plane = ZPlane(ZTransform(Vec3(0,-12,-25)));
     z_Plane.Init();
 
+    z_Troll = ZModel(ZTransform(Vec3(5, 0, 0),Vec3(0.0),Vec3(0.0127f)));
     z_Troll.Load("Zeus/Resource/Models/Troll", "scene.gltf");
+    z_Ship = ZModel(ZTransform(Vec3(2.5, 2, 0),Vec3(1.0)));
+    z_Ship.Load("Zeus/Resource/Models/SpaceShip", "scene.gltf");
 
     while (true)
     {
@@ -37,30 +41,14 @@ void ZApplication::Update()
         glClearColor(0.33, 0.33, 0.33, 1.0);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-        z_BasicShader.Attach();
-        Mat4 view = Mat4(1.0f);
-        Mat4 projection = Mat4(1.0f);
-        projection = glm::perspective(glm::radians(45.0f), (float)800 / (float)600, 0.1f, 100.0f);
-        view = glm::translate(view, glm::vec3(0.0f, 0.0f, -10.0f));
-        z_BasicShader.SetMat4("Projection", projection);
-        z_BasicShader.SetMat4("View", view);
+
         z_BasicCube.Render(z_BasicShader);
 
-        z_TrollShader.Attach();
-        Mat4 model = Mat4(1.0f);
-        model = glm::translate(model, Vec3(5, 0, 0));
-        model = glm::scale(model, Vec3(0.01275));
-        z_TrollShader.SetMat4("Model", model);
-        z_TrollShader.SetMat4("Projection", projection);
-        z_TrollShader.SetMat4("View", view);
         z_Troll.Render(z_TrollShader);
 
-
-        z_LightShader.Attach();
-        z_LightShader.SetMat4("Projection", projection);
-        z_LightShader.SetMat4("View", view);
         z_Sphere.Render(z_LightShader);
-        
+
+        z_Ship.Render(z_ShipShader);
 
         z_Plane.Render(z_LightShader);
 
