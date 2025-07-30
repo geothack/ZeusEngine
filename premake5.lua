@@ -17,6 +17,7 @@ project "Game"
     { 
         "Zeus/Source", 
         "Zeus/Dependencies/Glfw/Include", 
+        "Dependencies/Glad/Include",
         
     }
 
@@ -42,8 +43,7 @@ project "Game"
       "Game/Source/**.cpp"
     }
 
-    --pchheader "Core/Core.h"
-    --pchsource "src/Core/Core.cpp"
+    
 
    filter "configurations:Debug"
       defines { "DEBUG" }
@@ -103,6 +103,7 @@ project "Zeus"
     { 
         "Zeus/Dependencies/Glfw/Include", 
         "Dependencies/Glad/Include",
+        "Zeus/Source",
     }
 
     libdirs 
@@ -120,11 +121,21 @@ project "Zeus"
     }
 
 
+    pchheader "Core/CoreLibrary.h"
+    pchsource "Zeus/Source/Core/CoreLibrary.cpp"
+
+
     postbuildcommands { "{COPY} Zeus/Dependencies/Glfw/Library/glfw3.dll bin/Debug" }
 
        filter "configurations:Debug"
       defines { "DEBUG" }
       symbols "On"
+      buildoptions { "/MP" }
+
+
+      filter "configurations:Release"
+      defines { "NDEBUG" }
+      optimize "On"
       buildoptions { "/MP" }
 
 
@@ -149,3 +160,75 @@ project "Glad"
     { 
         "Dependencies/Glad/Include", 
     }
+
+
+     filter "configurations:Debug"
+      defines { "DEBUG" }
+      symbols "On"
+      buildoptions { "/MP" }
+
+
+      filter "configurations:Release"
+      defines { "NDEBUG" }
+      optimize "On"
+      buildoptions { "/MP" }
+
+
+
+
+project "Stb"
+    kind "StaticLib"
+
+    language "C++"
+    cppdialect "C++latest"
+    targetdir "bin/%{cfg.buildcfg}"
+
+    architecture ("x64")
+
+
+    files
+    { 
+      --"Dependencies/Glad/**.h", 
+      --"Dependencies/Glad/**.c", 
+    }
+
+
+     filter "configurations:Debug"
+      defines { "DEBUG" }
+      symbols "On"
+      buildoptions { "/MP" }
+
+
+      filter "configurations:Release"
+      defines { "NDEBUG" }
+      optimize "On"
+      buildoptions { "/MP" }
+
+
+project "Glfw"
+    kind "StaticLib"
+
+    language "C++"
+    cppdialect "C++latest"
+    targetdir "bin/%{cfg.buildcfg}"
+
+    architecture ("x64")
+
+
+    files
+    { 
+      --"Dependencies/Glad/**.h", 
+      --"Dependencies/Glad/**.c", 
+    }
+
+
+     filter "configurations:Debug"
+      defines { "DEBUG" }
+      symbols "On"
+      buildoptions { "/MP" }
+
+
+      filter "configurations:Release"
+      defines { "NDEBUG" }
+      optimize "On"
+      buildoptions { "/MP" }

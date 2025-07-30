@@ -1,3 +1,4 @@
+#include "Core/CoreLibrary.h"
 #include "ZApplication.h"
 
 ZApplication::ZApplication()

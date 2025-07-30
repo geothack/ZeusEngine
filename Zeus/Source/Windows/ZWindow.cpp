@@ -1,3 +1,4 @@
+#include "Core/CoreLibrary.h"
 #include "ZWindow.h"
 
 namespace {
@@ -96,7 +97,7 @@ void ZWindow::FramebufferSizeCallback(GLFWwindow* window, int width, int height)
 {
 	z_WindowSize.Width = width;
 	z_WindowSize.Height = height;
-	//glViewport(0, 0, width, height);
+	glViewport(0, 0, width, height);
 }
 
 void ZWindow::DebugLog(GLenum source, GLenum type, unsigned int id, GLenum severity, GLsizei length, const char* message, const void* userParam)

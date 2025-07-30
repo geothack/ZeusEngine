@@ -1,9 +1,24 @@
+#include "Zeus.h"
 
-#include "ZApplication.h"
 
-int main()
+class Game : public ZApplication
 {
-    auto game = ZApplication();
+public:
+    Game()
+    {
 
-    game.Update();
+    }
+
+    ~Game()
+    {
+
+    }
+
+
+};
+
+
+ZApplication* CreateZApplication()
+{
+    return new Game();
 }
