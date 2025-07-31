@@ -22,6 +22,7 @@ project "Game"
         "Dependencies/Assimp/Include", 
         "Dependencies/Stb/Include", 
         "Zeus/Dependencies/Entt/Include", 
+        "Dependencies/Ttf/Include", 
     }
 
     libdirs 
@@ -109,12 +110,14 @@ project "Zeus"
         "Dependencies/Assimp/Include", 
         "Dependencies/Stb/Include", 
         "Zeus/Dependencies/Entt/Include", 
+        "Dependencies/Ttf/Include", 
     }
 
     libdirs 
     {
        "Zeus/Dependencies/Glfw/Library", 
        "Dependencies/Assimp/Library", 
+       "Dependencies/Ttf/Library", 
        
     }
 
@@ -147,7 +150,7 @@ project "Zeus"
       {
           "assimp-vc143-mtd.lib",
           "assimp-vc143-mtd.dll",
-          --"freetyped.lib",
+          "freetyped.lib",
           --"box2dd.lib",
       }
 
@@ -162,7 +165,7 @@ project "Zeus"
       {
           "assimp-vc143-mt.lib",
           "assimp-vc143-mt.dll",
-          --"freetype.lib",
+          "freetype.lib",
           --"rbox2d.lib",
       }
 

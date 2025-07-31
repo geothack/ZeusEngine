@@ -13,7 +13,7 @@ ZEntity ZLevel::CreateUiTextEntity(const ZTransform& transform, const ZText& tex
 {
 	auto entity = ZEntity(z_Registry.create(), *this);
 	entity.AddComponent<ZTransform>(transform);
-	//entity.AddComponent<ZText>(text);
+	entity.AddComponent<ZText>(text);
 	entity.AddComponent<ZShader>(shader);
 	return entity;
 }

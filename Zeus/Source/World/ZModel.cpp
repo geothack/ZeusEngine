@@ -153,7 +153,7 @@ std::vector<ZTexture> ZModel::LoadTextures(aiMaterial* material, aiTextureType t
 	{
 		aiString string;
 		material->GetTexture(type, i, &string);
-		Log::Info(string.C_Str());
+		ZLog.Info(string.C_Str());
 
 		bool skip = false;
 

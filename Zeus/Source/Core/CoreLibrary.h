@@ -14,6 +14,8 @@
 
 #include <entt/entt.hpp>
 
+#include <freetype/freetype.h>
+
 // Standard Libraries
 #include <string_view>
 #include <print>
@@ -34,4 +36,6 @@
 #include "Core/Core.h"
 #include "stb_image.h"
 #include "Input/Input.h"
+#include "Core/Time.h"
+#include "Output/Output.h"
 

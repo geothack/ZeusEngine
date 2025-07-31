@@ -4,29 +4,35 @@
 class Log
 {
 public:
+	static Log& Get();
 
 	template<typename T>
-	static void Info(T var)
+	void Info(T var)
 	{
 		std::println("Info | {}", var);
 	}
 
 	template<typename T>
-	static void Debug(T var)
+	void Debug(T var)
 	{
 		std::println("Debug | {}", var);
 	}
 
 	template<typename T>
-	static void Warning(T var)
+	void Warning(T var)
 	{
 		std::println("Warning | {}", var);
 	}
 
 	template<typename T>
-	static void Error(T var)
+	void Error(T var)
 	{
 		std::println("Error | {}", var);
 	}
+
+	void Free();
+
+private:
+	inline static Log* z_Log = nullptr;
 };
 

@@ -9,10 +9,19 @@ ZApplication::~ZApplication()
 {
 }
 
+void ZApplication::FixedUpdate()
+{
+    z_TimeStep += ZTime.DeltaTime * 150.0f;
+    while (z_TimeStep >= z_GameWindow.GetVideoMode()->refreshRate)
+    {
+        z_TimeStep -= z_GameWindow.GetVideoMode()->refreshRate;
+
+        // Run entity fixed update here
+    }
+}
+
 void ZApplication::Update()
 {
-    auto gameWindow = ZWindow("Game", 800, 600);
-
     z_GameCamera = ZCamera(Vec3(0, 0, 10));
 
     //Log::Info(std::filesystem::current_path().string());
@@ -37,22 +46,23 @@ void ZApplication::Update()
     z_Boxes.Init();
 
     z_Sprite = z_MainLevel.CreateUiSpriteEntity(ZTransform(Vec3(10.0f, 540.0f, 0.0f), Vec3(270.0f, 0.0f, 0.0f), Vec3(50.0f, 50.0f, 0.0f)), ZSprite(), ZShader("Zeus/Resource/Shaders/Sprites/SpriteColored.vert", "Zeus/Resource/Shaders/Sprites/SpriteColored.frag"));
+    z_Text = z_MainLevel.CreateUiTextEntity(ZTransform(Vec3(400,500,0)), ZText("Hello World", 20, "Zeus/Resource/Fonts/Hey Comic.ttf", { .Red = 0.33, .Green = 0.67, .Blue = 0.89 }), ZShader("Zeus/Resource/Shaders/Texts/Text.vert", "Zeus/Resource/Shaders/Texts/Text.frag"));
 
-    //glfwSetInputMode(gameWindow.Get(), GLFW_CURSOR, GLFW_CURSOR_HIDDEN);
-    //glfwSetInputMode(gameWindow.Get(), GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+    //glfwSetInputMode(z_GameWindow.Get(), GLFW_CURSOR, GLFW_CURSOR_HIDDEN);
+    //glfwSetInputMode(z_GameWindow.Get(), GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 
-    glEnable(GL_DEPTH_TEST);
 
-    while (!glfwWindowShouldClose(gameWindow.Get()))
+    while (!glfwWindowShouldClose(z_GameWindow.Get()))
     {
-        gameWindow.Events();
+        z_GameWindow.Events();
 
         double currentTime = glfwGetTime();
-        z_DeltaTime = currentTime - z_LastFrame;
+        ZTime.DeltaTime = currentTime - z_LastFrame;
         z_LastFrame = currentTime;
 
-        glClearColor(0.33, 0.33, 0.33, 1.0);
-        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+        FixedUpdate();
+
+        z_Renderer3D.Update(z_MainLevel);
 
 
         z_BasicCube.Render(z_BasicShader, z_GameCamera);
@@ -63,12 +73,7 @@ void ZApplication::Update()
 
         z_Plane.Render(z_LightShader, z_GameCamera);
 
-        glDisable(GL_DEPTH_TEST);
-
-
-        z_Sprite.GetComponent<ZSprite>().Render(z_Sprite.GetComponent<ZShader>(), z_Sprite.GetComponent<ZTransform>());
-
-        glEnable(GL_DEPTH_TEST);
+        z_Renderer2D.Update(z_MainLevel);
 
         if (ZInput->Key(GLFW_KEY_A))
         {
@@ -119,6 +124,6 @@ void ZApplication::Update()
             z_GameCamera.ProcessMouseMovement(dx, dy);
         }*/
 
-        gameWindow.SwapBuffers();
+        z_GameWindow.SwapBuffers();
     }
 }

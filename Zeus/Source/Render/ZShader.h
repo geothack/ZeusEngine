@@ -1,5 +1,11 @@
 #pragma once
 
+struct Color
+{
+    double Red;
+    double Green;
+    double Blue;
+};
 
 class ZShader
 {
