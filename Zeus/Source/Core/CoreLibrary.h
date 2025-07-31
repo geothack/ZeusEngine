@@ -4,9 +4,11 @@
 
 #include <GLFW/glfw3.h>
 
+#define GLM_ENABLE_EXPERIMENTAL
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
+#include <glm/gtx/quaternion.hpp>
 
 #include <assimp/Importer.hpp>
 #include <assimp/scene.h>
@@ -20,6 +22,8 @@
 #include <AL/alc.h>
 
 #include <sndfile.h>
+
+#include <box2d/box2d.h>
 
 // Standard Libraries
 #include <string_view>

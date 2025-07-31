@@ -24,7 +24,8 @@ project "Game"
         "Zeus/Dependencies/Entt/Include", 
         "Dependencies/Ttf/Include", 
         "Dependencies/Openal/Include", 
-        "Dependencies/Sndfile/Include", 
+        "Dependencies/Sndfile/Include",
+        "Dependencies/Box2d/Include",  
     }
 
     libdirs 
@@ -115,6 +116,7 @@ project "Zeus"
         "Dependencies/Ttf/Include", 
         "Dependencies/Openal/Include", 
         "Dependencies/Sndfile/Include", 
+        "Dependencies/Box2d/Include", 
     }
 
     libdirs 
@@ -124,6 +126,7 @@ project "Zeus"
        "Dependencies/Ttf/Library", 
        "Dependencies/Openal/Library", 
        "Dependencies/Sndfile/Library", 
+       "Dependencies/Box2d/Library", 
        
     }
 
@@ -160,7 +163,7 @@ project "Zeus"
           "assimp-vc143-mtd.lib",
           "assimp-vc143-mtd.dll",
           "freetyped.lib",
-          --"box2dd.lib",
+          "box2dd.lib",
       }
 
 
@@ -175,7 +178,7 @@ project "Zeus"
           "assimp-vc143-mt.lib",
           "assimp-vc143-mt.dll",
           "freetype.lib",
-          --"rbox2d.lib",
+          "rbox2d.lib",
       }
 
 
