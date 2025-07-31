@@ -2,7 +2,8 @@
 #include "ZShader.h"
 #include "Core/Error.h"
 
-ZShader::ZShader(const std::filesystem::path& vertexShaderPath, const std::filesystem::path& fragShaderPath, const std::filesystem::path& geoShaderPath)
+ZShader::ZShader(const std::filesystem::path& vertexShaderPath, const std::filesystem::path& fragShaderPath, const Color& color, const std::filesystem::path& geoShaderPath, const std::vector<ZTexture>& textures) : z_Textures(textures)
+	, z_Color(color)
 {
 	if (geoShaderPath.empty())
 	{
@@ -60,6 +61,40 @@ void ZShader::MakeShader(const std::filesystem::path& vertexShaderPath, const st
 void ZShader::Attach() const
 {
 	glUseProgram(z_Program);
+}
+
+void ZShader::BindLighting(ZCamera& activeCamera) const
+{
+	SetVec3("viewPos", activeCamera.GetPos());
+
+	if (z_Color.Red != -1)
+	{
+		SetVec3("Color", Vec3(z_Color.Red, z_Color.Green, z_Color.Blue));
+	}
+
+	SetVec3("dirLight.direction", { -0.2f, -1.0f, -0.3f });
+	SetVec3("dirLight.ambient", { 0.05f, 0.05f, 0.05f });
+	SetVec3("dirLight.diffuse", { 0.4f, 0.4f, 0.4f });
+	SetVec3("dirLight.specular", { 0.5f, 0.5f, 0.5f });
+	
+	SetVec3("pointLight.position", Vec3(0));
+	SetVec3("pointLight.ambient", { 0.05f, 0.05f, 0.05f });
+	SetVec3("pointLight.diffuse", { 0.8f, 0.8f, 0.8f });
+	SetVec3("pointLight.specular", { 1.0f, 1.0f, 1.0f });
+	SetFloat("pointLight.constant", 1.0f);
+	SetFloat("pointLight.linear", 0.09f);
+	SetFloat("pointLight.quadratic", 0.032f);
+	
+	SetVec3("spotLight.position", activeCamera.GetPos());
+	SetVec3("spotLight.direction", activeCamera.GetFront());
+	SetVec3("spotLight.ambient", { 0.0f, 0.0f, 0.0f });
+	SetVec3("spotLight.diffuse", { 1.0f, 1.0f, 1.0f });
+	SetVec3("spotLight.specular", { 1.0f, 1.0f, 1.0f });
+	SetFloat("spotLight.constant", 1.0f);
+	SetFloat("spotLight.linear", 0.09f);
+	SetFloat("spotLight.quadratic", 0.032f);
+	SetFloat("spotLight.cutOff", glm::cos(glm::radians(12.5f)));
+	SetFloat("spotLight.outerCutOff", glm::cos(glm::radians(15.0f)));
 }
 
 void ZShader::SetVec3(std::string_view name, Vec3 value) const

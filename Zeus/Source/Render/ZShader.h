@@ -1,5 +1,8 @@
 #pragma once
 
+#include "Render/ZCamera.h"
+#include "Render/ZTexture.h"
+
 struct Color
 {
     double Red;
@@ -12,11 +15,13 @@ class ZShader
 public:
     ZShader() = default;
 
-    ZShader(const std::filesystem::path& vertexShaderPath, const std::filesystem::path& fragShaderPath, const std::filesystem::path& geoShaderPath = "");
+    ZShader(const std::filesystem::path& vertexShaderPath, const std::filesystem::path& fragShaderPath, const Color& color = {-1,-1,-1}, const std::filesystem::path& geoShaderPath = "", const std::vector<ZTexture>& textures = {});
 
     void MakeShader(const std::filesystem::path& vertexShaderPath, const std::filesystem::path& fragShaderPath, const std::filesystem::path& geoShaderPath = "");
 
     void Attach() const;
+
+    void BindLighting(ZCamera& activeCamera) const;
 
 public:
     void SetVec3(std::string_view name, Vec3 value) const;
@@ -46,4 +51,8 @@ private:
     char z_InfoLog[512]{};
 
     std::unordered_map<std::string, uint32_t> z_UniformCache{};
+
+    std::vector<ZTexture> z_Textures{};
+
+    Color z_Color{};
 };

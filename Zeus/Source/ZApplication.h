@@ -9,6 +9,7 @@
 #include "Render/ZRenderer2D.h"
 #include "Render/ZRenderer3D.h"
 #include "Render/ZShader.h"
+#include "Render/ZSkybox.h"
 #include "Windows/ZWindow.h"
 #include "World/ZEntity.h"
 #include "World/ZLevel.h"
@@ -35,6 +36,7 @@ private:
 	ZShader z_BoxesShader{};
 	ZBox z_Boxes{};
 
+	ZSkybox z_Skybox{};
 
 	ZLevel z_MainLevel{};
 	ZEntity z_Sprite{};

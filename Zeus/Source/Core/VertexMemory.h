@@ -32,6 +32,11 @@ public:
         glBufferData(z_Type, sizeof(data), data, usage);
     }
 
+    void SetDataS(const float* vertices, const void* data, GLenum usage)
+    {
+        glBufferData(z_Type, sizeof(vertices), data, usage);
+    }
+
     template<typename T>
     void UpdateData(GLintptr offset, GLuint noElements, T* data)
     {

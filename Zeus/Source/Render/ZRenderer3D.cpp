@@ -21,6 +21,7 @@ void ZRenderer3D::Update(ZLevel& level, ZCamera& activeCamera)
         for (auto [entity, transform, model, shader] : view.each())
         {
             shader.Attach();
+            shader.BindLighting(activeCamera);
             model.Render(shader, activeCamera,transform);
         }
     }
