@@ -31,7 +31,7 @@ void ZApplication::Update()
 
     z_Plane = z_MainLevel.Create3DMeshEntity(ZTransform(Vec3(0, -5, 0)), ZPlane(), ZShader("Zeus/Resource/Shaders/Light.vert", "Zeus/Resource/Shaders/Light.frag"));
     z_Plane.AddComponent<ZBoxCollider>(ZBoxCollider(z_Boxes,z_Plane.GetPosition(),Vec3(50,1,50)));
-    z_Sphere = z_MainLevel.Create3DMeshEntity(ZTransform(Vec3(-5.0, 0.0, 0.0), Vec3(0), Vec3(0.05f)), ZSphere(), ZShader("Zeus/Resource/Shaders/Light.vert", "Zeus/Resource/Shaders/Light.frag"));
+    z_Sphere = z_MainLevel.Create3DMeshEntity(ZTransform(Vec3(-5.0, 0.0, 0.0), Vec3(0), Vec3(0.05f)), ZSphere(), ZShader("Zeus/Resource/Shaders/Lighting/ADS.vert", "Zeus/Resource/Shaders/Lighting/ADS.frag"));
     z_Sphere.AddComponent<ZBoxCollider>(ZBoxCollider(z_Boxes,Vec3(-5.0,0,0.5), Vec3(1.0)));
     z_Cube = z_MainLevel.Create3DMeshEntity(ZTransform(Vec3(0.0), Vec3(45, 0, 0)), ZCube(), ZShader("Zeus/Resource/Shaders/Basic3d.vert", "Zeus/Resource/Shaders/Basic3d.frag"));
     z_Cube.AddComponent<ZBoxCollider>(ZBoxCollider(z_Boxes,Vec3(0),Vec3(3.0)));
@@ -58,6 +58,11 @@ void ZApplication::Update()
         z_Renderer3D.Update(z_MainLevel,z_GameCamera);
 
         z_Renderer2D.Update(z_MainLevel);
+
+        /*z_Sphere.GetComponent<ZShader>().Attach();
+        z_Sphere.GetComponent<ZShader>().SetVec3("ObjectColor", Vec3(1.0f, 0.5f, 0.31f));
+        z_Sphere.GetComponent<ZShader>().SetVec3("LightColor", Vec3(1.0f, 1.0f, 1.0f));
+        z_Sphere.GetComponent<ZShader>().SetVec3("LightPos", Vec3(0));*/
 
         ZRuntime.Update();
         
