@@ -47,4 +47,7 @@
 #include "Input/Input.h"
 #include "Core/Time.h"
 #include "Output/Output.h"
+#include "World/ZEntity.h"
+#include "Core/RuntimeCache.h"
+#include "Core/ResourceCache.h"
 

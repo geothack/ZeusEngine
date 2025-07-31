@@ -19,8 +19,8 @@ public:
 	template<class T>
 	void Add(T& object)
 	{
-		auto* entity = static_cast<Entity&>(object);
-		z_EntityCache.emplace_back(entity);
+		auto& entity = static_cast<ZEntity&>(object);
+		z_EntityCache.emplace_back(&entity);
 	}
 
 	void Add(ZEntity& entity)

@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Windows/ZWindow.h"
+#include "Gameplay/ZFPSController.h"
 #include "Render/Models/ZBox.h"
 #include "Render/Models/ZCube.h"
 #include "Render/Models/ZPlane.h"
@@ -9,6 +9,7 @@
 #include "Render/ZRenderer2D.h"
 #include "Render/ZRenderer3D.h"
 #include "Render/ZShader.h"
+#include "Windows/ZWindow.h"
 #include "World/ZEntity.h"
 #include "World/ZLevel.h"
 #include "World/ZTransform.h"
@@ -46,6 +47,8 @@ private:
 
 	ZRenderer2D z_Renderer2D{};
 	ZRenderer3D z_Renderer3D{};
+
+	ZFPSController z_FPSController{};
 };
 
 

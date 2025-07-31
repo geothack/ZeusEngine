@@ -8,7 +8,7 @@ public:
 	{
 		if (!z_Cache)
 		{
-			z_Cache = new ZResourceCache();
+			z_Cache = new ResourceCache();
 		}
 
 		return *z_Cache;
@@ -77,5 +77,5 @@ public:
 private:
 	std::tuple<std::unordered_map<std::string, T> ... > z_ResourceCache;
 
-	inline static ZResourceCache* z_Cache = nullptr;
+	inline static ResourceCache* z_Cache = nullptr;
 };

@@ -10,3 +10,6 @@ using Vec2 = glm::vec2; // 8 bytes can be passed by value
 #define ZLog Log::Get()
 #define ZTime Time::Get()
 #define ZOutput Output::Get()
+#define ZRuntime RuntimeCache::Get()
+#define ZRuntime RuntimeCache::Get()
+#define ZBoxes Box::Get()

@@ -16,7 +16,7 @@ public:
     {
         Init();
     }
-
+    
     void Init()
     {
         z_Vertices =
@@ -123,10 +123,13 @@ public:
     void Free()
     {
         z_ArrayObject.Free();
+        //delete z_Boxes;
     }
 
     std::vector<Vec3>& GetPositions() { return z_Positions; }
     std::vector<Vec3>& GetScales() { return z_Scales; }
+
+    inline static int Count = 0;
 
 private:
     ZArrayObject z_ArrayObject;
@@ -139,19 +142,39 @@ private:
 
 };
 
-class BoxCollider
+class ZBoxCollider
 {
 public:
-    /*BoxCollider(BoundTypes type, Box& boxes, const glm::vec3& position, const glm::vec3& scale)
+    ZBoxCollider(ZBox& boxes, Vec3 position = Vec3(0.0), Vec3 scale = Vec3(0.5)) : z_Boxes(boxes)
     {
-        mBounds = BoundingRegion(type);
-        mBounds.SetMin(glm::vec3(-5.0f));
-        mBounds.SetMax(glm::vec3(5.0f));
-        boxes.AddInstance(mBounds, position, scale);
-    }*/
+        z_Boxes.GetPositions().push_back(position);
+        z_Boxes.GetScales().push_back(scale);
+        z_Handle = z_Boxes.Count;
+        z_Boxes.Count++;
+    }
 
+    Vec3 GetPosition()
+    {
+        return z_Boxes.GetPositions()[z_Handle];
+    }
+
+    void SetPosition(Vec3 position)
+    {
+        z_Boxes.GetPositions()[z_Handle] = position;
+    }
+
+    Vec3 GetScale()
+    {
+        return z_Boxes.GetPositions()[z_Handle];
+    }
+
+    void SetScale(Vec3 scale)
+    {
+        z_Boxes.GetScales()[z_Handle] = scale;
+    }
 
 private:
-    //BoundingRegion mBounds;
+    int z_Handle{};
 
+    ZBox& z_Boxes;
 };
