@@ -6,7 +6,7 @@
 class Input
 {
 public:
-	static Input* Get();
+	static Input& Get();
 
 	bool Key(int key);
 
@@ -19,7 +19,7 @@ public:
 	ZMouse& GetMouse() { return z_Mouse; }
 
 private:
-	inline static Input* mInput = nullptr;
+	inline static Input* z_Input = nullptr;
 
 	ZKeyboard z_Keyboard;
 	ZMouse z_Mouse;

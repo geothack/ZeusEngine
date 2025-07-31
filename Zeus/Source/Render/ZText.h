@@ -17,7 +17,7 @@ class ZText
 {
 public:
 	ZText() = default;
-	ZText(std::string_view message, const int height, const std::filesystem::path& path, const Color& color);
+	ZText(std::string_view message, const int height, const Color& color, const std::filesystem::path& path = "Zeus/Resource/Fonts/Hey Comic.ttf");
 	~ZText() = default;
 
 	void LoadFont(const std::filesystem::path& path);

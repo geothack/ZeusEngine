@@ -31,17 +31,6 @@ private:
 
 	ZCamera z_GameCamera{};
 
-	ZShader z_BasicShader{}; 
-	ZCube z_BasicCube{};
-
-	ZShader z_LightShader{};
-	ZSphere z_Sphere{};
-
-	ZPlane z_Plane{};
-
-	ZShader z_ShipShader{};
-	ZModel z_Ship{};
-
 	ZShader z_BoxesShader{};
 	ZBox z_Boxes{};
 
@@ -49,6 +38,11 @@ private:
 	ZLevel z_MainLevel{};
 	ZEntity z_Sprite{};
 	ZEntity z_Text{};
+
+	ZEntity z_Ship{};
+	ZEntity z_Cube{};
+	ZEntity z_Plane{};
+	ZEntity z_Sphere{};
 
 	ZRenderer2D z_Renderer2D{};
 	ZRenderer3D z_Renderer3D{};

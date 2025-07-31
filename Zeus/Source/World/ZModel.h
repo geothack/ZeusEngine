@@ -9,14 +9,13 @@
 class ZModel
 {
 public:
-	ZModel();
-	ZModel(const ZTransform& transform);
+	ZModel(const std::filesystem::path& directory = "", const std::filesystem::path& path = "");
 
 	void Init();
 
 	void Load(const std::filesystem::path& directory, const std::filesystem::path& path);
 
-	void Render(ZShader& shader, ZCamera& activeCamera);
+	void Render(ZShader& shader, ZCamera& activeCamera, ZTransform& transform);
 
 	void Free();
 
@@ -32,8 +31,6 @@ protected:
 	std::vector<ZTexture> z_Textures;
 
 	std::filesystem::path z_Directory{};
-
-	ZTransform z_Transform;
 
 };
 

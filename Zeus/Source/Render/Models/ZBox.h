@@ -14,7 +14,7 @@ class ZBox
 public:
     ZBox()
     {
-
+        Init();
     }
 
     void Init()

@@ -3,12 +3,9 @@
 #include "Core/Error.h"
 #include "Windows/ZWindow.h"
 
-ZModel::ZModel()
+ZModel::ZModel(const std::filesystem::path& directory, const std::filesystem::path& path)
 {
-}
-
-ZModel::ZModel(const ZTransform& transform) : z_Transform(transform)
-{
+	Load(directory, path);
 }
 
 void ZModel::Init()
@@ -18,19 +15,22 @@ void ZModel::Init()
 void ZModel::Load(const std::filesystem::path& directory, const std::filesystem::path& path)
 {
 	z_Directory = directory;
-	Assimp::Importer import{};
-	const aiScene* scene = import.ReadFile((directory.string() + "/" + path.string()).c_str(), aiProcess_Triangulate | aiProcess_FlipUVs);
-
-	if (!scene || scene->mFlags & AI_SCENE_FLAGS_INCOMPLETE || !scene->mRootNode)
+	if (z_Directory != "")
 	{
-		auto string = "Assimp failed to load model | " + path.string() + " " + import.GetErrorString();
-		Error error(string);
-	}
+		Assimp::Importer import{};
+		const aiScene* scene = import.ReadFile((directory.string() + "/" + path.string()).c_str(), aiProcess_Triangulate | aiProcess_FlipUVs);
 
-	ProcessNode(scene->mRootNode, scene);
+		if (!scene || scene->mFlags & AI_SCENE_FLAGS_INCOMPLETE || !scene->mRootNode)
+		{
+			auto string = "Assimp failed to load model | " + path.string() + " " + import.GetErrorString();
+			Error error(string);
+		}
+
+		ProcessNode(scene->mRootNode, scene);
+	}
 }
 
-void ZModel::Render(ZShader& shader, ZCamera& activeCamera)
+void ZModel::Render(ZShader& shader, ZCamera& activeCamera, ZTransform& transform)
 {
 	Mat4 model = Mat4(1.0);
 	Mat4 view = Mat4(1.0);
@@ -39,12 +39,12 @@ void ZModel::Render(ZShader& shader, ZCamera& activeCamera)
 	projection = glm::perspective(glm::radians(45.0f), (float)ZWindow::GetSize().Width / (float)ZWindow::GetSize().Height, 0.1f, 100.0f);
 	view = activeCamera.GetViewMatrix();
 
-	model = glm::translate(model, z_Transform.GetPosition());
-	if (z_Transform.GetRotation() != Vec3(0.0))
+	model = glm::translate(model, transform.GetPosition());
+	if (transform.GetRotation() != Vec3(0.0))
 	{
 		model = glm::rotate(model, static_cast<float>(45.0f * glfwGetTime() * 0.01), Vec3(1, 1, 0));
 	}
-	model = glm::scale(model, z_Transform.GetScale());
+	model = glm::scale(model, transform.GetScale());
 
 	shader.Attach();
 	shader.SetMat4("Model", model);

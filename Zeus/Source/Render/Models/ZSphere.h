@@ -7,19 +7,17 @@
 class ZSphere : public ZModel
 {
 public:
-	ZSphere() = default;
-	ZSphere(const ZTransform& transform) : ZModel(transform)
+	ZSphere() : ZModel("Zeus/Resource/Models/Sphere", "scene.gltf")
 	{
-
+		Init();
 	}
 
 	void Init()
 	{
-		Load("Zeus/Resource/Models/Sphere", "scene.gltf");
 	}
 
-	void Render(ZShader& shader, ZCamera& activeCamera)
+	void Render(ZShader& shader, ZCamera& activeCamera, ZTransform& transform)
 	{
-		ZModel::Render(shader, activeCamera);
+		ZModel::Render(shader, activeCamera, transform);
 	}
 };

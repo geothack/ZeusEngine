@@ -3,7 +3,7 @@
 #include "Core/Error.h"
 #include "Windows/ZWindow.h"
 
-ZText::ZText(std::string_view message, const int height, const std::filesystem::path& path, const Color& color) : Message(message), z_Height(height)
+ZText::ZText(std::string_view message, const int height, const Color& color, const std::filesystem::path& path) : Message(message), z_Height(height)
     , TextColor(color)
 {
     LoadFont(path);

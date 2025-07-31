@@ -6,17 +6,17 @@ namespace {
 
 	void CursorPosCallback(GLFWwindow* window, double _x, double _y)
 	{
-		ZInput->GetMouse().SetPosition(_x, _y);
+		ZInput.GetMouse().SetPosition(_x, _y);
 	}
 
 	void MouseButtonCallback(GLFWwindow* window, int button, int action, int mods)
 	{
-		ZInput->GetMouse().SetButtons(button, action);
+		ZInput.GetMouse().SetButtons(button, action);
 	}
 
 	void MouseWheelCallback(GLFWwindow* window, double dx, double dy)
 	{
-		ZInput->GetMouse().SetWheel(dx, dy);
+		ZInput.GetMouse().SetWheel(dx, dy);
 	}
 
 }
@@ -83,7 +83,7 @@ void ZWindow::Events() const
 {
 	glfwPollEvents();
 
-	if (ZInput->KeyWentDown(GLFW_KEY_ESCAPE))
+	if (ZInput.KeyWentDown(GLFW_KEY_ESCAPE))
 	{
 		glfwSetWindowShouldClose(z_PlatformWindow, true);
 	}

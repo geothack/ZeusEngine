@@ -7,10 +7,9 @@
 class ZCube : public ZModel
 {
 public:
-    ZCube() = default;
-	ZCube(const ZTransform& transform) : ZModel(transform)
+	ZCube()
 	{
-
+        Init();
 	}
 
 	void Init()
@@ -73,8 +72,8 @@ public:
         z_Meshes.emplace_back(ZMesh(Vertex::GenerateList(vertices, numOfVertices), indices));
 	}
 
-	void Render(ZShader& shader, ZCamera& activeCamera)
+	void Render(ZShader& shader, ZCamera& activeCamera, ZTransform& transform)
 	{
-        ZModel::Render(shader, activeCamera);
+        ZModel::Render(shader, activeCamera, transform);
 	}
 };

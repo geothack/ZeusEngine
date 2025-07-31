@@ -1,14 +1,14 @@
 #include "Core/CoreLibrary.h"
 #include "Input.h"
 
-Input* Input::Get()
+Input& Input::Get()
 {
-	if (!mInput)
+	if (!z_Input)
 	{
-		mInput = new Input();
+		z_Input = new Input();
 	}
 
-	return mInput;
+	return *z_Input;
 }
 
 bool Input::Key(int key)
@@ -28,5 +28,5 @@ bool Input::KeyWentDown(int key)
 
 void Input::Free()
 {
-	delete mInput;
+	delete z_Input;
 }
