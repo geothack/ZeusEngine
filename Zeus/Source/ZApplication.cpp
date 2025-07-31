@@ -36,6 +36,8 @@ void ZApplication::Update()
 
     z_Boxes.Init();
 
+    z_Sprite = z_MainLevel.CreateUiSpriteEntity(ZTransform(Vec3(10.0f, 540.0f, 0.0f), Vec3(270.0f, 0.0f, 0.0f), Vec3(50.0f, 50.0f, 0.0f)), ZSprite(), ZShader("Zeus/Resource/Shaders/Sprites/SpriteColored.vert", "Zeus/Resource/Shaders/Sprites/SpriteColored.frag"));
+
     //glfwSetInputMode(gameWindow.Get(), GLFW_CURSOR, GLFW_CURSOR_HIDDEN);
     //glfwSetInputMode(gameWindow.Get(), GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 
@@ -60,6 +62,13 @@ void ZApplication::Update()
         z_Ship.Render(z_ShipShader, z_GameCamera);
 
         z_Plane.Render(z_LightShader, z_GameCamera);
+
+        glDisable(GL_DEPTH_TEST);
+
+
+        z_Sprite.GetComponent<ZSprite>().Render(z_Sprite.GetComponent<ZShader>(), z_Sprite.GetComponent<ZTransform>());
+
+        glEnable(GL_DEPTH_TEST);
 
         if (ZInput->Key(GLFW_KEY_A))
         {

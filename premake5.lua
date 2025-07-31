@@ -21,7 +21,7 @@ project "Game"
         "Dependencies/Glm/Include",
         "Dependencies/Assimp/Include", 
         "Dependencies/Stb/Include", 
-        
+        "Zeus/Dependencies/Entt/Include", 
     }
 
     libdirs 
@@ -108,6 +108,7 @@ project "Zeus"
         "Dependencies/Glm/Include",
         "Dependencies/Assimp/Include", 
         "Dependencies/Stb/Include", 
+        "Zeus/Dependencies/Entt/Include", 
     }
 
     libdirs 

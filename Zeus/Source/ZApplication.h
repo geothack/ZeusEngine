@@ -7,6 +7,8 @@
 #include "Render/Models/ZSphere.h"
 #include "Render/ZCamera.h"
 #include "Render/ZShader.h"
+#include "World/ZEntity.h"
+#include "World/ZLevel.h"
 #include "World/ZTransform.h"
 
 class ZApplication
@@ -38,6 +40,9 @@ private:
 	ZShader z_BoxesShader{};
 	ZBox z_Boxes{};
 
+
+	ZLevel z_MainLevel{};
+	ZEntity z_Sprite{};
 };
 
 

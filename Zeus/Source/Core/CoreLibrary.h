@@ -12,6 +12,8 @@
 #include <assimp/scene.h>
 #include <assimp/postprocess.h>
 
+#include <entt/entt.hpp>
+
 // Standard Libraries
 #include <string_view>
 #include <print>
