@@ -23,6 +23,8 @@ project "Game"
         "Dependencies/Stb/Include", 
         "Zeus/Dependencies/Entt/Include", 
         "Dependencies/Ttf/Include", 
+        "Dependencies/Openal/Include", 
+        "Dependencies/Sndfile/Include", 
     }
 
     libdirs 
@@ -111,6 +113,8 @@ project "Zeus"
         "Dependencies/Stb/Include", 
         "Zeus/Dependencies/Entt/Include", 
         "Dependencies/Ttf/Include", 
+        "Dependencies/Openal/Include", 
+        "Dependencies/Sndfile/Include", 
     }
 
     libdirs 
@@ -118,6 +122,8 @@ project "Zeus"
        "Zeus/Dependencies/Glfw/Library", 
        "Dependencies/Assimp/Library", 
        "Dependencies/Ttf/Library", 
+       "Dependencies/Openal/Library", 
+       "Dependencies/Sndfile/Library", 
        
     }
 
@@ -126,8 +132,9 @@ project "Zeus"
        "glfw3.dll",
        "glfw3.lib",
        "Glad",
-       
-       
+       "OpenAL32.lib",
+       "OpenAL32.dll",
+       "sndfile.lib",
     }
 
 
@@ -137,6 +144,8 @@ project "Zeus"
 
     postbuildcommands { "{COPY} Zeus/Dependencies/Glfw/Library/glfw3.dll bin/Debug" }
     postbuildcommands { "{COPY} Dependencies/Assimp/Library/assimp-vc143-mtd.dll bin/Debug" }
+    postbuildcommands { "{COPY} Dependencies/Openal/Library/OpenAL32.dll bin/Debug" }
+    postbuildcommands { "{COPY} Dependencies/Sndfile/Library/sndfile.dll bin/Debug" }
 
     filter "files:**.c"
       flags { "NoPCH" }

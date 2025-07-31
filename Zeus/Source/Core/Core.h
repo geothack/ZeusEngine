@@ -9,3 +9,4 @@ using Vec2 = glm::vec2; // 8 bytes can be passed by value
 #define ZInput Input::Get()
 #define ZLog Log::Get()
 #define ZTime Time::Get()
+#define ZOutput Output::Get()

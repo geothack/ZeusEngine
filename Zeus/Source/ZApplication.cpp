@@ -48,6 +48,8 @@ void ZApplication::Update()
     z_Sprite = z_MainLevel.CreateUiSpriteEntity(ZTransform(Vec3(10.0f, 540.0f, 0.0f), Vec3(270.0f, 0.0f, 0.0f), Vec3(50.0f, 50.0f, 0.0f)), ZSprite(), ZShader("Zeus/Resource/Shaders/Sprites/SpriteColored.vert", "Zeus/Resource/Shaders/Sprites/SpriteColored.frag"));
     z_Text = z_MainLevel.CreateUiTextEntity(ZTransform(Vec3(400,500,0)), ZText("Hello World", 20, "Zeus/Resource/Fonts/Hey Comic.ttf", { .Red = 0.33, .Green = 0.67, .Blue = 0.89 }), ZShader("Zeus/Resource/Shaders/Texts/Text.vert", "Zeus/Resource/Shaders/Texts/Text.frag"));
 
+    ZOutput.Load("Shoot", "Zeus/Resource/Sounds/Shoot.wav");
+
     //glfwSetInputMode(z_GameWindow.Get(), GLFW_CURSOR, GLFW_CURSOR_HIDDEN);
     //glfwSetInputMode(z_GameWindow.Get(), GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 
@@ -109,6 +111,11 @@ void ZApplication::Update()
         {
             z_Boxes.GetPositions().push_back(Vec3(z_Boxes.GetPositions().size() * 1.0f));
             z_Boxes.GetScales().push_back(Vec3(z_Boxes.GetScales().size() * 1.0f));
+        }
+
+        if (ZInput->KeyWentDown(GLFW_KEY_P))
+        {
+            ZOutput.Play("Shoot");
         }
 
 

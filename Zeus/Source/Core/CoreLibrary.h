@@ -16,6 +16,11 @@
 
 #include <freetype/freetype.h>
 
+#include <AL/al.h>
+#include <AL/alc.h>
+
+#include <sndfile.h>
+
 // Standard Libraries
 #include <string_view>
 #include <print>
