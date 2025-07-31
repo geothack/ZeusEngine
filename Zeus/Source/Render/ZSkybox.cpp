@@ -8,12 +8,12 @@ ZSkybox::ZSkybox(const std::vector<std::string_view>& faces) : z_Faces(faces)
     {
         z_Faces = 
         {
-            "Zeus/Resource/Textures/Desert/SkyboxDesert_E.png",
-            "Zeus/Resource/Textures/Desert/SkyboxDesert_W.png",
-            "Zeus/Resource/Textures/Desert/SkyboxDesert_U.png",
-            "Zeus/Resource/Textures/Desert/SkyboxDesert_D.png",
-            "Zeus/Resource/Textures/Desert/SkyboxDesert_N.png",
-            "Zeus/Resource/Textures/Desert/SkyboxDesert_S.png"
+            "Zeus/Resource/Textures/Very Big Mountains/VeryBigMountains_E.png",
+            "Zeus/Resource/Textures/Very Big Mountains/VeryBigMountains_W.png",
+            "Zeus/Resource/Textures/Very Big Mountains/VeryBigMountains_U.png",
+            "Zeus/Resource/Textures/Very Big Mountains/VeryBigMountains_D.png",
+            "Zeus/Resource/Textures/Very Big Mountains/VeryBigMountains_S.png",
+            "Zeus/Resource/Textures/Very Big Mountains/VeryBigMountains_N.png"
         };
     }
     Init(z_Faces);
@@ -30,56 +30,56 @@ void ZSkybox::Init(const std::vector<std::string_view>& faces)
     float skyboxVertices[] =
     {
         // positions          
-        -100.0f,  100.0f, -100.0f,
-        -100.0f, -100.0f, -100.0f,
-         100.0f, -100.0f, -100.0f,
-         100.0f, -100.0f, -100.0f,
-         100.0f,  100.0f, -100.0f,
-        -100.0f,  100.0f, -100.0f,
-
-        -100.0f, -100.0f,  100.0f,
-        -100.0f, -100.0f, -100.0f,
-        -100.0f,  100.0f, -100.0f,
-        -100.0f,  100.0f, -100.0f,
-        -100.0f,  100.0f,  100.0f,
-        -100.0f, -100.0f,  100.0f,
-
-         100.0f, -100.0f, -100.0f,
-         100.0f, -100.0f,  100.0f,
-         100.0f,  100.0f,  100.0f,
-         100.0f,  100.0f,  100.0f,
-         100.0f,  100.0f, -100.0f,
-         100.0f, -100.0f, -100.0f,
-
-        -100.0f, -100.0f,  100.0f,
-        -100.0f,  100.0f,  100.0f,
-         100.0f,  100.0f,  100.0f,
-         100.0f,  100.0f,  100.0f,
-         100.0f, -100.0f,  100.0f,
-        -100.0f, -100.0f,  100.0f,
-
-        -100.0f,  100.0f, -100.0f,
-         100.0f,  100.0f, -100.0f,
-         100.0f,  100.0f,  100.0f,
-         100.0f,  100.0f,  100.0f,
-        -100.0f,  100.0f,  100.0f,
-        -100.0f,  100.0f, -100.0f,
-
-        -100.0f, -100.0f, -100.0f,
-        -100.0f, -100.0f,  100.0f,
-         100.0f, -100.0f, -100.0f,
-         100.0f, -100.0f, -100.0f,
-        -100.0f, -100.0f,  100.0f,
-         100.0f, -100.0f,  100.0f
+        -1000.0f,  1000.0f, -1000.0f,
+        -1000.0f, -1000.0f, -1000.0f,
+         1000.0f, -1000.0f, -1000.0f,
+         1000.0f, -1000.0f, -1000.0f,
+         1000.0f,  1000.0f, -1000.0f,
+        -1000.0f,  1000.0f, -1000.0f,
+         
+        -1000.0f, -1000.0f,  1000.0f,
+        -1000.0f, -1000.0f, -1000.0f,
+        -1000.0f,  1000.0f, -1000.0f,
+        -1000.0f,  1000.0f, -1000.0f,
+        -1000.0f,  1000.0f,  1000.0f,
+        -1000.0f, -1000.0f,  1000.0f,
+          
+         1000.0f, -1000.0f, -1000.0f,
+         1000.0f, -1000.0f,  1000.0f,
+         1000.0f,  1000.0f,  1000.0f,
+         1000.0f,  1000.0f,  1000.0f,
+         1000.0f,  1000.0f, -1000.0f,
+         1000.0f, -1000.0f, -1000.0f,
+         
+        -1000.0f, -1000.0f,  1000.0f,
+        -1000.0f,  1000.0f,  1000.0f,
+         1000.0f,  1000.0f,  1000.0f,
+         1000.0f,  1000.0f,  1000.0f,
+         1000.0f, -1000.0f,  1000.0f,
+        -1000.0f, -1000.0f,  1000.0f,
+           
+        -1000.0f,  1000.0f, -1000.0f,
+         1000.0f,  1000.0f, -1000.0f,
+         1000.0f,  1000.0f,  1000.0f,
+         1000.0f,  1000.0f,  1000.0f,
+        -1000.0f,  1000.0f,  1000.0f,
+        -1000.0f,  1000.0f, -1000.0f,
+         
+        -1000.0f, -1000.0f, -1000.0f,
+        -1000.0f, -1000.0f,  1000.0f,
+         1000.0f, -1000.0f, -1000.0f,
+         1000.0f, -1000.0f, -1000.0f,
+        -1000.0f, -1000.0f,  1000.0f,
+         1000.0f, -1000.0f,  1000.0f
     };
 
     z_ArrayObject.Generate();
     z_ArrayObject.Attach();
-
+    
     z_ArrayObject["VBO"] = ZBufferObject(GL_ARRAY_BUFFER);
     z_ArrayObject["VBO"].Generate();
     z_ArrayObject["VBO"].Attach();
-    z_ArrayObject["VBO"].SetDataS(skyboxVertices, &skyboxVertices, GL_STATIC_DRAW);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(skyboxVertices), &skyboxVertices, GL_STATIC_DRAW);
     z_ArrayObject["VBO"].SetAttPointer<float>(0, 3, GL_FLOAT, 3, 0);
 
     z_CubeMapTexture = Load(faces);
@@ -113,7 +113,7 @@ uint32_t ZSkybox::Load(const std::vector<std::string_view>& faces)
 
     int width, height, nrComponents;
 
-    //stbi_set_flip_vertically_on_load(true);
+    stbi_set_flip_vertically_on_load(true);
 
     for (unsigned int i = 0; i < faces.size(); i++)
     {

@@ -29,7 +29,7 @@ void ZApplication::Update()
     z_BoxesShader = ZShader("Zeus/Resource/Shaders/Box.vert", "Zeus/Resource/Shaders/Box.frag");
 
 
-    z_Plane = z_MainLevel.Create3DMeshEntity(ZTransform(Vec3(0, -5, 0)), ZPlane(), ZShader("Zeus/Resource/Shaders/Lighting/ADS.vert", "Zeus/Resource/Shaders/Lighting/ADS.frag", { .Red = 1.0, .Green = 0.12, .Blue = 0.89 }));
+    z_Plane = z_MainLevel.Create3DMeshEntity(ZTransform(Vec3(0, -5, 0)), ZPlane(), ZShader("Zeus/Resource/Shaders/Lighting/ADS.vert", "Zeus/Resource/Shaders/Lighting/ADS.frag", { .Red = 0.33, .Green = 0.33, .Blue = 0.33 }));
     z_Plane.AddComponent<ZBoxCollider>(ZBoxCollider(z_Boxes,z_Plane.GetPosition(),Vec3(50,1,50)));
     z_Sphere = z_MainLevel.Create3DMeshEntity(ZTransform(Vec3(-5.0, 0.0, 0.0), Vec3(0), Vec3(0.05f)), ZSphere(), ZShader("Zeus/Resource/Shaders/Lighting/ADS.vert", "Zeus/Resource/Shaders/Lighting/ADS.frag", { .Red = 1.0, .Green = 0.0, .Blue = 0.23 }));
     z_Sphere.AddComponent<ZBoxCollider>(ZBoxCollider(z_Boxes,Vec3(-5.0,0,0.5), Vec3(1.0)));
@@ -55,9 +55,9 @@ void ZApplication::Update()
         ZTime.DeltaTime = currentTime - z_LastFrame;
         z_LastFrame = currentTime;
 
-        z_Skybox.Render(z_GameCamera);
-
         z_Renderer3D.Update(z_MainLevel,z_GameCamera);
+
+        z_Skybox.Render(z_GameCamera);
 
         z_Renderer2D.Update(z_MainLevel);
 
@@ -68,8 +68,6 @@ void ZApplication::Update()
         {
             z_Boxes.Render(z_BoxesShader,z_GameCamera);
         }
-
-       
 
         FixedUpdate();
 
