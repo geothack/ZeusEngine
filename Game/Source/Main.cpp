@@ -6,7 +6,7 @@ class Game : public ZApplication
 public:
     Game()
     {
-
+        ZApplication::Update(MainLevel);
     }
 
     ~Game()
@@ -14,6 +14,7 @@ public:
 
     }
 
+    ZLevel MainLevel{};
 
 };
 

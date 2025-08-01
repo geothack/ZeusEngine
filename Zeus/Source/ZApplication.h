@@ -23,7 +23,7 @@ public:
 	virtual ~ZApplication();
 
 	void FixedUpdate();
-	void Update();
+	void Update(ZLevel& activeLevel);
 
 private:
 

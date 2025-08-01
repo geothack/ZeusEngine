@@ -20,7 +20,7 @@ void ZApplication::FixedUpdate()
     }
 }
 
-void ZApplication::Update()
+void ZApplication::Update(ZLevel& activeLevel)
 {
     z_GameCamera = ZCamera(Vec3(0, 0, 10));
 
