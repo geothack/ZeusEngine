@@ -10,7 +10,7 @@ ZRenderer3D::~ZRenderer3D()
 {
 }
 
-void ZRenderer3D::Update(ZLevel& level, ZCamera& activeCamera)
+void ZRenderer3D::Update(ZLevel& level, ZCamera& activeCamera, ZSkybox& skyBox)
 {
 	glClearColor(0.33, 0.33, 0.33, 1.0);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -22,6 +22,16 @@ void ZRenderer3D::Update(ZLevel& level, ZCamera& activeCamera)
         {
             shader.Attach();
             shader.BindLighting(activeCamera);
+            if (shader.GetTextures().size() > 0)
+            {
+                shader.GetTextures()[0].Attach();
+                glBindTextureUnit(0, shader.GetTextures()[0].GetHandle());
+            }
+            if (shader.SetSky)
+            {
+                shader.SetInt("skybox", 1);
+                glBindTextureUnit(1, skyBox.GetHandle());
+            }
             model.Render(shader, activeCamera,transform);
         }
     }

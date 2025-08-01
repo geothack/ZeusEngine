@@ -2,7 +2,7 @@
 #include "ZShader.h"
 #include "Core/Error.h"
 
-ZShader::ZShader(const std::filesystem::path& vertexShaderPath, const std::filesystem::path& fragShaderPath, const Color& color, const std::filesystem::path& geoShaderPath, const std::vector<ZTexture>& textures) : z_Textures(textures)
+ZShader::ZShader(const std::filesystem::path& vertexShaderPath, const std::filesystem::path& fragShaderPath, const Color& color, const std::filesystem::path& geoShaderPath, const std::vector<ZTexture>& textures, bool setSky) : z_Textures(textures), SetSky(setSky)
 	, z_Color(color)
 {
 	if (geoShaderPath.empty())

@@ -15,7 +15,7 @@ class ZShader
 public:
     ZShader() = default;
 
-    ZShader(const std::filesystem::path& vertexShaderPath, const std::filesystem::path& fragShaderPath, const Color& color = {-1,-1,-1}, const std::filesystem::path& geoShaderPath = "", const std::vector<ZTexture>& textures = {});
+    ZShader(const std::filesystem::path& vertexShaderPath, const std::filesystem::path& fragShaderPath, const Color& color = {-1,-1,-1}, const std::filesystem::path& geoShaderPath = "", const std::vector<ZTexture>& textures = {}, bool setSky = false);
 
     void MakeShader(const std::filesystem::path& vertexShaderPath, const std::filesystem::path& fragShaderPath, const std::filesystem::path& geoShaderPath = "");
 
@@ -32,8 +32,12 @@ public:
 
     void SetFloat(std::string_view name, float value) const;
 
+    bool SetSky = false;
+
 public:
     inline uint32_t GetHandle() const { return z_Program; }
+
+    std::vector<ZTexture>& GetTextures() { return z_Textures; }
 
 private:
     void Create(uint32_t& shader, const char* path, uint32_t type);
@@ -45,7 +49,6 @@ private:
     uint32_t z_Vertex{};
     uint32_t z_Fragment{};
     uint32_t z_Geometry{};
-
 
     int z_Success{};
     char z_InfoLog[512]{};

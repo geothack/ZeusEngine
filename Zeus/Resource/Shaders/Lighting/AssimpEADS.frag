@@ -48,9 +48,9 @@ uniform DirLight dirLight;
 uniform PointLight pointLight;
 uniform SpotLight spotLight;
 //uniform vec3 Color;
-uniform sampler2D diffuse0;
-uniform sampler2D specular0;
 uniform samplerCube skybox;
+uniform sampler2D diffuse0;
+
 
 vec3 CalcDirLight(DirLight light, vec3 normal, vec3 viewDir, vec4 mapColor)
 {

@@ -47,10 +47,12 @@ uniform vec3 viewPos;
 uniform DirLight dirLight;
 uniform PointLight pointLight;
 uniform SpotLight spotLight;
-uniform vec3 Color;
+//uniform vec3 Color;
 uniform samplerCube skybox;
+uniform sampler2D diffuse0;
 
-vec3 CalcDirLight(DirLight light, vec3 normal, vec3 viewDir, vec3 mapColor)
+
+vec3 CalcDirLight(DirLight light, vec3 normal, vec3 viewDir, vec4 mapColor)
 {
     vec3 lightDir = normalize(-light.direction);
     // diffuse shading
@@ -59,17 +61,16 @@ vec3 CalcDirLight(DirLight light, vec3 normal, vec3 viewDir, vec3 mapColor)
     vec3 reflectDir = reflect(-lightDir, normal);
     float spec = pow(max(dot(viewDir, reflectDir), 0.0), 32);
     // combine results
-    vec3 ambient = light.ambient * Color * mapColor;
-    //* vec3(texture(material.diffuse, TexCoords));
-    vec3 diffuse = light.diffuse * diff * Color * mapColor;
-    //* vec3(texture(material.diffuse, TexCoords));
-    vec3 specular = light.specular * spec * Color * mapColor;
-    //* vec3(texture(material.specular, TexCoords));
+    vec4 mDiff = vec4(texture(diffuse0, TexPos).rgb,1.0);
+    vec4 result = mix(mDiff,mapColor,0.3);
+    vec3 ambient = light.ambient * result.rgb;
+    vec3 diffuse = light.diffuse * diff * result.rgb;
+    vec3 specular = light.specular * spec * result.rgb;
     return (ambient + diffuse + specular);
 }
 
 // calculates the color when using a point light.
-vec3 CalcPointLight(PointLight light, vec3 normal, vec3 fragPos, vec3 viewDir, vec3 mapColor)
+vec3 CalcPointLight(PointLight light, vec3 normal, vec3 fragPos, vec3 viewDir, vec4 mapColor)
 {
     vec3 lightDir = normalize(light.position - fragPos);
     // diffuse shading
@@ -81,12 +82,11 @@ vec3 CalcPointLight(PointLight light, vec3 normal, vec3 fragPos, vec3 viewDir, v
     float distance = length(light.position - fragPos);
     float attenuation = 1.0 / (light.constant + light.linear * distance + light.quadratic * (distance * distance));    
     // combine results
-    vec3 ambient = light.ambient * Color * mapColor;
-    //* vec3(texture(material.diffuse, TexCoords));
-    vec3 diffuse = light.diffuse * diff * Color * mapColor;
-    //* vec3(texture(material.diffuse, TexCoords));
-    vec3 specular = light.specular * spec * Color * mapColor;
-    //* vec3(texture(material.specular, TexCoords));
+    vec4 mDiff = vec4(texture(diffuse0, TexPos).rgb,1.0);
+    vec4 result = mix(mDiff,mapColor,0.3);
+    vec3 ambient = light.ambient * result.rgb;
+    vec3 diffuse = light.diffuse * diff * result.rgb;
+    vec3 specular = light.specular * spec * result.rgb;
     ambient *= attenuation;
     diffuse *= attenuation;
     specular *= attenuation;
@@ -94,7 +94,7 @@ vec3 CalcPointLight(PointLight light, vec3 normal, vec3 fragPos, vec3 viewDir, v
 }
 
 // calculates the color when using a spot light.
-vec3 CalcSpotLight(SpotLight light, vec3 normal, vec3 fragPos, vec3 viewDir, vec3 mapColor)
+vec3 CalcSpotLight(SpotLight light, vec3 normal, vec3 fragPos, vec3 viewDir, vec4 mapColor)
 {
     vec3 lightDir = normalize(light.position - fragPos);
     // diffuse shading
@@ -110,12 +110,11 @@ vec3 CalcSpotLight(SpotLight light, vec3 normal, vec3 fragPos, vec3 viewDir, vec
     float epsilon = light.cutOff - light.outerCutOff;
     float intensity = clamp((theta - light.outerCutOff) / epsilon, 0.0, 1.0);
     // combine results
-    vec3 ambient = light.ambient * Color * mapColor;
-    //* vec3(texture(material.diffuse, TexCoords));
-    vec3 diffuse = light.diffuse * diff * Color * mapColor;
-    //* vec3(texture(material.diffuse, TexCoords));
-    vec3 specular = light.specular * spec * Color * mapColor;
-    //* vec3(texture(material.specular, TexCoords));
+    vec4 mDiff = vec4(texture(diffuse0, TexPos).rgb,1.0);
+    vec4 result = mix(mDiff,mapColor,0.3);
+    vec3 ambient = light.ambient * result.rgb;
+    vec3 diffuse = light.diffuse * diff * result.rgb;
+    vec3 specular = light.specular * spec * result.rgb;
     ambient *= attenuation * intensity;
     diffuse *= attenuation * intensity;
     specular *= attenuation * intensity;
@@ -132,12 +131,12 @@ void main()
     
     vec4 Colour = vec4(texture(skybox, R).rgb, 1.0);
     
-    vec3 result = CalcDirLight(dirLight, norm, viewDir,Colour.rgb);
 
+    vec3 result = CalcDirLight(dirLight, norm, viewDir,Colour);
 
-    result += CalcPointLight(pointLight, norm, FragPos, viewDir,Colour.rgb); 
+    result += CalcPointLight(pointLight, norm, FragPos, viewDir,Colour); 
         
-    result += CalcSpotLight(spotLight, norm, FragPos, viewDir,Colour.rgb);    
+    result += CalcSpotLight(spotLight, norm, FragPos, viewDir,Colour);    
     
     OutColor = vec4(result, 1.0);
 }

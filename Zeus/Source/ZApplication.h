@@ -37,6 +37,9 @@ private:
 	ZBox z_Boxes{};
 
 	ZShader z_EMapping = ZShader("Zeus/Resource/Shaders/Skybox/eMapping.vert", "Zeus/Resource/Shaders/Skybox/eMapping.frag");
+	ZShader z_TEMapping = ZShader("Zeus/Resource/Shaders/Lighting/TEADS.vert", "Zeus/Resource/Shaders/Lighting/TEADS.frag");
+
+	ZTexture z_Wood = ZTexture("diffues0","Zeus/Resource/Textures/Wood.png");
 
 	ZSkybox z_Skybox{};
 
