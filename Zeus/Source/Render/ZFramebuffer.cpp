@@ -66,6 +66,7 @@ void ZFramebuffer::Detach() const
 
 void ZFramebuffer::Render(bool doRender)
 {
+    glBindTexture(GL_TEXTURE_2D, z_Texture);
     glBindTextureUnit(0, z_Texture);
     if (doRender)
     {

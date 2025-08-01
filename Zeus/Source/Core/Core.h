@@ -13,3 +13,4 @@ using Vec2 = glm::vec2; // 8 bytes can be passed by value
 #define ZRuntime RuntimeCache::Get()
 #define ZRuntime RuntimeCache::Get()
 #define ZBoxes Box::Get()
+#define ZUniforms UniformBuffer::Get()

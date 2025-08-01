@@ -1,5 +1,6 @@
 #include "Core/CoreLibrary.h"
 #include "ZFPSController.h"
+#include "Render/ZRenderer3D.h"
 
 ZFPSController::ZFPSController(ZWindow& window, ZCamera& camera) : z_FPSCamera(&camera)
 {
@@ -54,6 +55,11 @@ void ZFPSController::Update()
     if (ZInput.KeyWentDown(GLFW_KEY_P))
     {
         ZOutput.Play("Shoot");
+    }
+
+    if (ZInput.KeyWentDown(GLFW_KEY_B))
+    {
+        ZRenderer3D::RenderColliders = !ZRenderer3D::RenderColliders;
     }
 
 

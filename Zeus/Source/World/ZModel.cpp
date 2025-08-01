@@ -2,6 +2,7 @@
 #include "ZModel.h"
 #include "Core/Error.h"
 #include "Windows/ZWindow.h"
+#include "Core/UniformBuffer.h"
 
 ZModel::ZModel(const std::filesystem::path& directory, const std::filesystem::path& path)
 {
@@ -32,27 +33,20 @@ void ZModel::Load(const std::filesystem::path& directory, const std::filesystem:
 
 void ZModel::Render(ZShader& shader, ZCamera& activeCamera, ZTransform& transform, bool depthPass)
 {
-	if (!depthPass)
+	
+	Mat4 model = Mat4(1.0);
+
+	model = glm::translate(model, transform.GetPosition());
+	if (transform.GetRotation() != Vec3(0.0))
 	{
-		Mat4 model = Mat4(1.0);
-		Mat4 view = Mat4(1.0);
-		Mat4 projection = Mat4(1.0);
-
-		projection = glm::perspective(glm::radians(45.0f), (float)ZWindow::GetSize().Width / (float)ZWindow::GetSize().Height, 0.1f, 100.0f);
-		view = activeCamera.GetViewMatrix();
-
-		model = glm::translate(model, transform.GetPosition());
-		if (transform.GetRotation() != Vec3(0.0))
-		{
-			model = glm::rotate(model, static_cast<float>(45.0f * glfwGetTime() * 0.01), Vec3(1, 1, 0));
-		}
-		model = glm::scale(model, transform.GetScale());
-
-		shader.Attach();
-		shader.SetMat4("Model", model);
-		shader.SetMat4("View", view);
-		shader.SetMat4("Projection", projection);
+		model = glm::rotate(model, static_cast<float>(45.0f * glfwGetTime() * 0.01), Vec3(1, 1, 0));
 	}
+	model = glm::scale(model, transform.GetScale());
+
+	shader.Attach();
+	shader.SetMat4("Model", model);
+	
+	ZUniforms.Attach("Camera", shader.GetHandle(), "Camera");
 
 	for (auto& zMesh : z_Meshes)
 	{

@@ -3,7 +3,7 @@ layout (location = 0) in vec4 vertex;
 
 out vec2 TexCoords;
 
-layout (std140, binding = 1) uniform SpriteCamera
+layout (std140, binding = 0) uniform Camera
 {
     mat4 Projection;
 };

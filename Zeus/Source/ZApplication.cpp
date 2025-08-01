@@ -24,9 +24,10 @@ void ZApplication::Update()
 {
     z_GameCamera = ZCamera(Vec3(0, 0, 10));
 
-    //Log::Info(std::filesystem::current_path().string());
+    ZUniforms.Create("Camera", sizeof(CameraData), 0);
+    ZUniforms.Update("Camera", 0, glm::value_ptr(z_CameraData.View), sizeof(z_CameraData.View));
+    ZUniforms.Update("Camera", sizeof(z_CameraData.Projection), glm::value_ptr(z_CameraData.Projection), sizeof(z_CameraData.Projection));
 
-    z_BoxesShader = ZShader("Zeus/Resource/Shaders/Box.vert", "Zeus/Resource/Shaders/Box.frag");
 
     z_Cube2 = z_MainLevel.Create3DMeshEntity(ZTransform(Vec3(-7.5, 0, 0), Vec3(45, 0, 0)), ZCube(), ZShader("Zeus/Resource/Shaders/Lighting/TEADS.vert", "Zeus/Resource/Shaders/Lighting/TEADS.frag", { .Red = -1, .Green = -1, .Blue = -1 },"",{ ZTexture("diffues0","Zeus/Resource/Textures/Wood.png") },true));
     z_Cube2.AddComponent<ZBoxCollider>(ZBoxCollider(z_Boxes, Vec3(0), Vec3(3.0)));
@@ -57,19 +58,16 @@ void ZApplication::Update()
         ZTime.DeltaTime = currentTime - z_LastFrame;
         z_LastFrame = currentTime;
 
-        z_Renderer3D.Update(z_MainLevel,z_GameCamera,z_Skybox);
+        z_CameraData.View = z_GameCamera.GetViewMatrix();
+        z_CameraData.Projection = glm::perspective(glm::radians(45.0f), (float)ZWindow::GetSize().Width / (float)ZWindow::GetSize().Height, 0.1f, 100.0f);
+        ZUniforms.Update("Camera", 0, glm::value_ptr(z_CameraData.View), sizeof(z_CameraData.View));
+        ZUniforms.Update("Camera", sizeof(z_CameraData.Projection), glm::value_ptr(z_CameraData.Projection), sizeof(z_CameraData.Projection));
 
-        z_Skybox.Render(z_GameCamera);
+        z_Renderer3D.Update(z_MainLevel,z_GameCamera,z_Boxes,z_Skybox);
 
         z_Renderer2D.Update(z_MainLevel);
 
         ZRuntime.Update();
-        
-
-        if (z_Boxes.GetPositions().size() > 0)
-        {
-            z_Boxes.Render(z_BoxesShader,z_GameCamera);
-        }
 
         FixedUpdate();
 
@@ -78,6 +76,7 @@ void ZApplication::Update()
 
     ZLog.Free();
     ZInput.Free();
+    ZUniforms.Free();
     ZOutput.Free();
     ZTime.Free();
     ZRuntime.Free();

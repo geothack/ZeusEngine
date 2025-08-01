@@ -1,5 +1,6 @@
 #pragma once
 
+#include "Core/UniformBuffer.h"
 #include "Gameplay/ZFPSController.h"
 #include "Render/Models/ZBox.h"
 #include "Render/Models/ZCube.h"
@@ -28,12 +29,13 @@ private:
 
 	ZWindow z_GameWindow = ZWindow("ZeusEngine", 800, 600);
 
+	CameraData z_CameraData{};
+
 	double z_TimeStep{};
 	double z_LastFrame{};
 
 	ZCamera z_GameCamera{};
 
-	ZShader z_BoxesShader{};
 	ZBox z_Boxes{};
 
 	ZShader z_EMapping = ZShader("Zeus/Resource/Shaders/Skybox/eMapping.vert", "Zeus/Resource/Shaders/Skybox/eMapping.frag");
