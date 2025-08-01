@@ -36,6 +36,8 @@ private:
 	ZShader z_BoxesShader{};
 	ZBox z_Boxes{};
 
+	ZShader z_EMapping = ZShader("Zeus/Resource/Shaders/Skybox/eMapping.vert", "Zeus/Resource/Shaders/Skybox/eMapping.frag");
+
 	ZSkybox z_Skybox{};
 
 	ZLevel z_MainLevel{};
@@ -44,6 +46,7 @@ private:
 
 	ZEntity z_Ship{};
 	ZEntity z_Cube{};
+	ZEntity z_Cube2{};
 	ZEntity z_Plane{};
 	ZEntity z_Sphere{};
 
