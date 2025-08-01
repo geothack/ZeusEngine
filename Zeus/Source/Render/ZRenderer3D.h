@@ -18,5 +18,6 @@ public:
 
 private:
 	ZShader z_BoxesShader = ZShader("Zeus/Resource/Shaders/Box.vert", "Zeus/Resource/Shaders/Box.frag");
+	ZShader z_RedBoxesShader = ZShader("Zeus/Resource/Shaders/RBox.vert", "Zeus/Resource/Shaders/RBox.frag");
 };
 

@@ -63,6 +63,8 @@ void ZApplication::Update()
         ZUniforms.Update("Camera", 0, glm::value_ptr(z_CameraData.View), sizeof(z_CameraData.View));
         ZUniforms.Update("Camera", sizeof(z_CameraData.Projection), glm::value_ptr(z_CameraData.Projection), sizeof(z_CameraData.Projection));
 
+        z_Ship.GetComponent<ZTransform>().SetPosition(Vec3(glm::sin(currentTime * glm::two_pi<float>() * 0.1) * 15.0, z_Ship.GetPosition().y, z_Ship.GetPosition().z));
+
         z_Renderer3D.Update(z_MainLevel,z_GameCamera,z_Boxes,z_Skybox);
 
         z_Renderer2D.Update(z_MainLevel);

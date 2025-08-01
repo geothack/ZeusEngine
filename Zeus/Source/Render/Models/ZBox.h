@@ -173,6 +173,19 @@ public:
         z_Boxes.GetScales()[z_Handle] = scale;
     }
 
+    bool HasCollided(const float extent, ZBoxCollider& other, const float otherExtent)
+    {
+        glm::vec3 aMin = GetPosition();
+        glm::vec3 aMax = Vec3(GetPosition().x + extent, GetPosition().y + extent, GetPosition().z + extent);
+
+        glm::vec3 bMin = other.GetPosition();
+        glm::vec3 bMax = Vec3(other.GetPosition().x + otherExtent, other.GetPosition().y + otherExtent, other.GetPosition().z + otherExtent);
+
+        return (aMin.x < bMax.x && aMax.x > bMin.x &&
+            aMin.y < bMax.y && aMax.y > bMin.y &&
+            aMin.z < bMax.z && aMax.z > bMin.z);
+    }
+
 private:
     int z_Handle{};
 

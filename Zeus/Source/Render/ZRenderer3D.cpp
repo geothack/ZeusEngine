@@ -21,6 +21,11 @@ void ZRenderer3D::Update(ZLevel& level, ZCamera& activeCamera, ZBox boxes, ZSkyb
 
         for (auto [entity, transform, model, shader] : view.each())
         {
+            if (level.GetRegister().any_of<ZBoxCollider>(entity))
+            {
+                level.GetRegister().get<ZBoxCollider>(entity).SetPosition(transform.GetPosition());
+            }
+
             shader.Attach();
             shader.BindLighting(activeCamera);
             if (shader.GetTextures().size() > 0)
