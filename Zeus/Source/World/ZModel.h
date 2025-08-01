@@ -15,7 +15,7 @@ public:
 
 	void Load(const std::filesystem::path& directory, const std::filesystem::path& path);
 
-	void Render(ZShader& shader, ZCamera& activeCamera, ZTransform& transform);
+	void Render(ZShader& shader, ZCamera& activeCamera, ZTransform& transform, bool depthPass = false);
 
 	void Free();
 
