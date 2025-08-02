@@ -7,7 +7,7 @@ class ZFPSController : public ZEntity
 {
 public:
 	ZFPSController() = default;
-	ZFPSController(ZWindow& window, ZCamera& camera);
+	ZFPSController(ZCamera& camera);
 	~ZFPSController() override;
 
 	void Start() override;

@@ -12,9 +12,14 @@
 class ZBox
 {
 public:
-    ZBox()
+    static ZBox& Get()
     {
-        Init();
+        if (!z_Boxes)
+        {
+            z_Boxes = new ZBox();
+        }
+
+        return *z_Boxes;
     }
     
     void Init()
@@ -123,7 +128,7 @@ public:
     void Free()
     {
         z_ArrayObject.Free();
-        //delete z_Boxes;
+        delete z_Boxes;
     }
 
     std::vector<Vec3>& GetPositions() { return z_Positions; }
@@ -140,37 +145,39 @@ private:
     std::vector<Vec3> z_Positions;
     std::vector<Vec3> z_Scales;
 
+    inline static ZBox* z_Boxes = nullptr;
+
 };
 
 class ZBoxCollider
 {
 public:
-    ZBoxCollider(ZBox& boxes, Vec3 position = Vec3(0.0), Vec3 scale = Vec3(0.5)) : z_Boxes(boxes)
+    ZBoxCollider(Vec3 position = Vec3(0.0), Vec3 scale = Vec3(0.5))
     {
-        z_Boxes.GetPositions().push_back(position);
-        z_Boxes.GetScales().push_back(scale);
-        z_Handle = z_Boxes.Count;
-        z_Boxes.Count++;
+        Boxes.GetPositions().push_back(position);
+        Boxes.GetScales().push_back(scale);
+        z_Handle = Boxes.Count;
+        Boxes.Count++;
     }
 
     Vec3 GetPosition()
     {
-        return z_Boxes.GetPositions()[z_Handle];
+        return Boxes.GetPositions()[z_Handle];
     }
 
     void SetPosition(Vec3 position)
     {
-        z_Boxes.GetPositions()[z_Handle] = position;
+        Boxes.GetPositions()[z_Handle] = position;
     }
 
     Vec3 GetScale()
     {
-        return z_Boxes.GetPositions()[z_Handle];
+        return Boxes.GetPositions()[z_Handle];
     }
 
     void SetScale(Vec3 scale)
     {
-        z_Boxes.GetScales()[z_Handle] = scale;
+        Boxes.GetScales()[z_Handle] = scale;
     }
 
     bool HasCollided(const float extent, ZBoxCollider& other, const float otherExtent)
@@ -189,5 +196,4 @@ public:
 private:
     int z_Handle{};
 
-    ZBox& z_Boxes;
 };

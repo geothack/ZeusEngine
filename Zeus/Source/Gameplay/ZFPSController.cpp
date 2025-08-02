@@ -2,10 +2,10 @@
 #include "ZFPSController.h"
 #include "Render/ZRenderer3D.h"
 
-ZFPSController::ZFPSController(ZWindow& window, ZCamera& camera) : z_FPSCamera(&camera)
+ZFPSController::ZFPSController(ZCamera& camera) : z_FPSCamera(&camera)
 {
-    glfwSetInputMode(window.Get(), GLFW_CURSOR, GLFW_CURSOR_HIDDEN);
-    glfwSetInputMode(window.Get(), GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+    glfwSetInputMode(ZWindow::Get(), GLFW_CURSOR, GLFW_CURSOR_HIDDEN);
+    glfwSetInputMode(ZWindow::Get(), GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 }
 
 ZFPSController::~ZFPSController()

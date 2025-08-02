@@ -24,23 +24,15 @@ public:
 	virtual ~ZApplication();
 
 	void FixedUpdate();
-	void Update(ZLevel& level, ZCamera& activeCamera);
+	void Update(ZLevel& level, ZCamera& activeCamera, ZSkybox* xkyBox = nullptr);
 
 private:
-
 	ZWindow z_GameWindow = ZWindow("ZeusEngine", 800, 600);
 
 	CameraData z_CameraData{};
 
 	double z_TimeStep{};
 	double z_LastFrame{};
-
-
-	ZBox z_Boxes{};
-
-	ZSkybox z_Skybox{};
-
-	
 
 	ZRenderer2D z_Renderer2D{};
 	ZRenderer3D z_Renderer3D{};

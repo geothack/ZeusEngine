@@ -12,7 +12,7 @@ public:
 	ZRenderer3D();
 	~ZRenderer3D();
 
-	void Update(ZLevel& level, ZCamera& activeCamera, ZBox boxes, ZSkybox& skybox);
+	void Update(ZLevel& level, ZCamera& activeCamera, ZSkybox* skybox = nullptr);
 
 	inline static bool RenderColliders = false;
 

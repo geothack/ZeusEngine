@@ -11,7 +11,7 @@ ZRenderer3D::~ZRenderer3D()
 {
 }
 
-void ZRenderer3D::Update(ZLevel& level, ZCamera& activeCamera, ZBox boxes, ZSkybox& skyBox)
+void ZRenderer3D::Update(ZLevel& level, ZCamera& activeCamera, ZSkybox* skyBox)
 {
 	glClearColor(0.33, 0.33, 0.33, 1.0);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -33,10 +33,13 @@ void ZRenderer3D::Update(ZLevel& level, ZCamera& activeCamera, ZBox boxes, ZSkyb
                 shader.GetTextures()[0].Attach();
                 glBindTextureUnit(0, shader.GetTextures()[0].GetHandle());
             }
-            if (shader.SetSky)
+            if (skyBox)
             {
-                shader.SetInt("skybox", 1);
-                glBindTextureUnit(1, skyBox.GetHandle());
+                if (shader.SetSky)
+                {
+                    shader.SetInt("skybox", 1);
+                    glBindTextureUnit(1, skyBox->GetHandle());
+                }
             }
             model.Render(shader, activeCamera,transform);
         }
@@ -44,12 +47,15 @@ void ZRenderer3D::Update(ZLevel& level, ZCamera& activeCamera, ZBox boxes, ZSkyb
 
     if (RenderColliders)
     {
-        if (boxes.GetPositions().size() > 0)
+        if (Boxes.GetPositions().size() > 0)
         {
-            boxes.Render(z_BoxesShader, activeCamera);
+            Boxes.Render(z_BoxesShader, activeCamera);
         }
     }
 
-    skyBox.Render(activeCamera);
+    if (skyBox)
+    {
+        skyBox->Render(activeCamera);
+    }
 
 }

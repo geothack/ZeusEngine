@@ -13,6 +13,8 @@ public:
 	ZWindow(std::string_view title, const int width, const int height);
 	~ZWindow();
 
+	
+
 	ZWindow(const ZWindow&) = delete;
 	ZWindow& operator=(ZWindow&&) = delete;
 	ZWindow& operator=(const ZWindow&) = delete;
@@ -22,7 +24,7 @@ public:
 
 	void SwapBuffers() const;
 
-	GLFWwindow* const Get() const { return z_PlatformWindow; }
+	static GLFWwindow* Get() { return z_PlatformWindow; }
 
 	const GLFWvidmode* GetVideoMode() const { return z_VideoMode; }
 
@@ -33,7 +35,7 @@ private:
 	static void APIENTRY DebugLog(GLenum source, GLenum type, unsigned int id, GLenum severity, GLsizei length, const char* message, const void* userParam);
 
 private:
-	GLFWwindow* z_PlatformWindow;
+	inline static GLFWwindow* z_PlatformWindow = nullptr;
 	const GLFWvidmode* z_VideoMode;
 
 	inline static Size z_WindowSize = {};
