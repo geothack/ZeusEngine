@@ -13,6 +13,9 @@
 #include <assimp/Importer.hpp>
 #include <assimp/scene.h>
 #include <assimp/postprocess.h>
+#include <assimp/quaternion.h>
+#include <assimp/vector3.h>
+#include <assimp/matrix4x4.h>
 
 #include <entt/entt.hpp>
 
@@ -50,4 +53,5 @@
 #include "World/ZEntity.h"
 #include "Core/RuntimeCache.h"
 #include "Core/ResourceCache.h"
+#include "Animation/3D/AssimpGLMHelpers.h"
 

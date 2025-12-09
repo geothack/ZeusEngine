@@ -98,10 +98,19 @@ void ZMesh::Init()
 	z_ArrayObject["VBO"].Attach();
 	z_ArrayObject["VBO"].SetData<Vertex>(z_Vertices.size(), &z_Vertices[0], GL_STATIC_DRAW);
 
-
+																//22
 	z_ArrayObject["VBO"].SetAttPointer<GLfloat>(0, 3, GL_FLOAT, 8, 0);
 	z_ArrayObject["VBO"].SetAttPointer<GLfloat>(1, 2, GL_FLOAT, 8, 3);
 	z_ArrayObject["VBO"].SetAttPointer<GLfloat>(2, 3, GL_FLOAT, 8, 5);
+
+	// ids
+	//glEnableVertexAttribArray(3);
+	//glVertexAttribIPointer(3, 4, GL_INT, sizeof(Vertex), (void*)offsetof(Vertex, m_BoneIDs));
+
+	//// weights
+	//glEnableVertexAttribArray(4);
+	//glVertexAttribPointer(4, 4, GL_FLOAT, GL_FALSE, sizeof(Vertex),
+	//	(void*)offsetof(Vertex, m_Weights));
 
 	z_ArrayObject.Detach();
 
