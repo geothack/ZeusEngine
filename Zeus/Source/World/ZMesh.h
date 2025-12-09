@@ -12,14 +12,14 @@ struct Vertex
 	Vec2 TextureCoordinate;
 	Vec3 Normal;
 
-	//glm::vec3 Tangent;
-	//// bitangent
-	//glm::vec3 Bitangent;
+	glm::vec3 Tangent;
+	// bitangent
+	glm::vec3 Bitangent;
 
-	////bone indexes which will influence this vertex
-	//int m_BoneIDs[MAX_BONE_INFLUENCE];
-	////weights from each bone
-	//float m_Weights[MAX_BONE_INFLUENCE];
+	//bone indexes which will influence this vertex
+	int m_BoneIDs[MAX_BONE_INFLUENCE];
+	//weights from each bone
+	float m_Weights[MAX_BONE_INFLUENCE];
 
 	static std::vector<Vertex> GenerateList(const float* vertices, const int numOfVertices);
 

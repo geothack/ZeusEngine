@@ -6,17 +6,7 @@
 #include "World/ZTransform.h"
 
 #include "Animation/3D/AssimpGLMHelpers.h"
-
-struct BoneInfo
-{
-	/*id is index in finalBoneMatrices*/
-	int id;
-
-	/*offset matrix transforms vertex from model space to bone space*/
-	glm::mat4 offset;
-
-};
-
+#include "Animation/3D/ZBoneInfo.h"
 
 class ZModel
 {
@@ -34,7 +24,7 @@ public:
 	auto& GetBoneInfoMap() { return m_BoneInfoMap; }
 	int& GetBoneCount() { return m_BoneCounter; }
 
-	/*void SetVertexBoneDataToDefault(Vertex& vertex)
+	void SetVertexBoneDataToDefault(Vertex& vertex)
 	{
 		for (int i = 0; i < MAX_BONE_INFLUENCE; i++)
 		{
@@ -54,7 +44,7 @@ public:
 				break;
 			}
 		}
-	}*/
+	}
 
 
 	void ExtractBoneWeightForVertices(std::vector<Vertex>& vertices, aiMesh* mesh, const aiScene* scene)
@@ -88,7 +78,7 @@ public:
 				int vertexId = weights[weightIndex].mVertexId;
 				float weight = weights[weightIndex].mWeight;
 				assert(vertexId <= vertices.size());
-				//SetVertexBoneData(vertices[vertexId], boneID, weight);
+				SetVertexBoneData(vertices[vertexId], boneID, weight);
 			}
 		}
 	}

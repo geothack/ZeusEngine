@@ -85,6 +85,7 @@ ZMesh ZModel::ProcessMesh(aiMesh* mesh, const aiScene* scene)
 	for (unsigned int i = 0; i < mesh->mNumVertices; i++)
 	{
 		Vertex vertex;
+		SetVertexBoneDataToDefault(vertex);
 
 		vertex.Position = glm::vec3
 		(
@@ -138,6 +139,8 @@ ZMesh ZModel::ProcessMesh(aiMesh* mesh, const aiScene* scene)
 		std::vector<ZTexture> specular = LoadTextures(material, aiTextureType_SPECULAR);
 		textures.insert(textures.end(), specular.begin(), specular.end());
 	}
+
+	ExtractBoneWeightForVertices(vertices, mesh, scene);
 
 	return ZMesh(vertices, indices, textures);
 }
