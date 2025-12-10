@@ -19,8 +19,8 @@ void Demon::FixedUpdate()
 void Demon::Update()
 {
 	z_Animator.UpdateAnimation(ZTime.DeltaTime);
-	//GetComponent<ZShader>().Attach();
-	//auto transforms = z_Animator.GetFinalBoneMatrices();
-	//for (int i = 0; i < transforms.size(); ++i)
-	//	GetComponent<ZShader>().SetMat4("finalBonesMatrices[" + std::to_string(i) + "]", transforms[i]);
+	GetComponent<ZShader>().Attach();
+	auto transforms = z_Animator.GetFinalBoneMatrices();
+	for (int i = 0; i < transforms.size(); ++i)
+		GetComponent<ZShader>().SetMat4("finalBonesMatrices[" + std::to_string(i) + "]", transforms[i]);
 }

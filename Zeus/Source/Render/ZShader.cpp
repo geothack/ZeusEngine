@@ -112,15 +112,17 @@ void ZShader::SetVec3(std::string_view name, Vec3 value) const
 
 void ZShader::SetMat4(std::string_view name, const Mat4& value) const
 {
-	const auto uniform = z_UniformCache.find(name.data());
-	const auto string = std::format("Failed to find uniform {}", name);
+	//const auto uniform = z_UniformCache.find(name.data());
+	//const auto string = std::format("Failed to find uniform {}", name);
+	//
+	//if (uniform == std::ranges::cend(z_UniformCache))
+	//{
+	//	Error error(string);
+	//}
+	//
+	//::glUniformMatrix4fv(uniform->second, 1, GL_FALSE, glm::value_ptr(value));
 
-	if (uniform == std::ranges::cend(z_UniformCache))
-	{
-		Error error(string);
-	}
-
-	::glUniformMatrix4fv(uniform->second, 1, GL_FALSE, glm::value_ptr(value));
+	glUniformMatrix4fv(glGetUniformLocation(z_Program, name.data()), 1, GL_FALSE, &value[0][0]);
 }
 
 void ZShader::SetInt(std::string_view name, int value) const

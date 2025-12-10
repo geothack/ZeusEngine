@@ -99,18 +99,33 @@ void ZMesh::Init()
 	z_ArrayObject["VBO"].SetData<Vertex>(z_Vertices.size(), &z_Vertices[0], GL_STATIC_DRAW);
 
 																//8
-	z_ArrayObject["VBO"].SetAttPointer<GLfloat>(0, 3, GL_FLOAT, 22, 0);
-	z_ArrayObject["VBO"].SetAttPointer<GLfloat>(1, 2, GL_FLOAT, 22, 3);
-	z_ArrayObject["VBO"].SetAttPointer<GLfloat>(2, 3, GL_FLOAT, 22, 5);
+	//z_ArrayObject["VBO"].SetAttPointer<GLfloat>(0, 3, GL_FLOAT, 22, 0);
+	//z_ArrayObject["VBO"].SetAttPointer<GLfloat>(1, 2, GL_FLOAT, 22, 3);
+	//z_ArrayObject["VBO"].SetAttPointer<GLfloat>(2, 3, GL_FLOAT, 22, 5);
+	//z_ArrayObject["VBO"].SetAttPointer<GLint>(4, 1, GL_INT, 22, 14);
 
-	// ids
+	glEnableVertexAttribArray(0);
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)0);
+	// vertex normals
+	glEnableVertexAttribArray(1);
+	glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)offsetof(Vertex, TextureCoordinate));
+	// vertex texture coords
+	glEnableVertexAttribArray(2);
+	glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)offsetof(Vertex, Normal));
+	// vertex tangent
 	glEnableVertexAttribArray(3);
-	glVertexAttribIPointer(3, 4, GL_INT, sizeof(Vertex), (void*)offsetof(Vertex, m_BoneIDs));
+	glVertexAttribPointer(3, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)offsetof(Vertex, Tangent));
+	// vertex bitangent
+	glEnableVertexAttribArray(4);
+	glVertexAttribPointer(4, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)offsetof(Vertex, Bitangent));
+	// ids
+	glEnableVertexAttribArray(5);
+	glVertexAttribIPointer(5, 4, GL_INT, sizeof(Vertex), (void*)offsetof(Vertex, m_BoneIDs));
 
 	// weights
-	glEnableVertexAttribArray(4);
-	glVertexAttribPointer(4, 4, GL_FLOAT, GL_FALSE, sizeof(Vertex),
-		(void*)offsetof(Vertex, m_Weights));
+	glEnableVertexAttribArray(6);
+	glVertexAttribPointer(6, 4, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)offsetof(Vertex, m_Weights));
+	//glBindVertexArray(0);
 
 	z_ArrayObject.Detach();
 

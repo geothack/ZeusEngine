@@ -3,6 +3,8 @@
 layout (location = 0) in vec3 Pos;
 layout (location = 1) in vec2 Tex;
 layout (location = 2) in vec3 Norm;
+layout (location = 3) in vec3 tangent;
+layout (location = 4) in vec3 bitangent;
 layout (location = 5) in ivec4 boneIds; 
 layout (location = 6) in vec4 weights;
 
@@ -40,6 +42,7 @@ void main()
     }
 
 	gl_Position = Projection * View * Model * totalPosition;
+    gl_Position = Projection * View * Model * vec4(Pos,1.0);
 	FragPos = vec3(Model * vec4(Pos, 1.0));
 	TexPos = Tex;
 	Normal = mat3(transpose(inverse(Model))) * Norm;
