@@ -1,4 +1,4 @@
-#version 460 core
+#version 330  core
 
 layout (location = 0) in vec3 Pos;
 layout (location = 1) in vec2 Tex;
@@ -8,7 +8,7 @@ layout (location = 4) in vec3 bitangent;
 layout (location = 5) in ivec4 boneIds; 
 layout (location = 6) in vec4 weights;
 
-layout (std140, binding = 0) uniform Camera
+layout (std140) uniform Camera
 {
     mat4 View;
     mat4 Projection;
@@ -38,7 +38,7 @@ void main()
         }
         vec4 localPosition = finalBonesMatrices[boneIds[i]] * vec4(Pos,1.0f);
         totalPosition += localPosition * weights[i];
-        vec3 localNormal = mat3(finalBonesMatrices[boneIds[i]]) * Norm;
+        //vec3 localNormal = mat3(finalBonesMatrices[boneIds[i]]) * Norm;
     }
 
 	gl_Position = Projection * View * Model * totalPosition;
