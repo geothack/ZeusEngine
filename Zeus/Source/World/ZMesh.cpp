@@ -5,7 +5,7 @@ std::vector<Vertex> Vertex::GenerateList(const float* vertices, const int numOfV
 {
 	std::vector<Vertex> ret(numOfVertices);
 
-	int stride = sizeof(Vertex) / sizeof(float);
+	int stride = 8;
 
 	for (auto i = 0; i < numOfVertices; i++)
 	{

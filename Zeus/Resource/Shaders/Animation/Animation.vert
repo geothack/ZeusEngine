@@ -14,19 +14,19 @@ layout (std140, binding = 0) uniform Camera
     mat4 Projection;
 };
 
-const int MAX_BONES = 100;
-const int MAX_BONE_INFLUENCE = 4;
-uniform mat4 finalBonesMatrices[MAX_BONES];
-
 out vec3 FragPos;
 out vec2 TexPos;
 out vec3 Normal;
 
 uniform mat4 Model;
 
+const int MAX_BONES = 100;
+const int MAX_BONE_INFLUENCE = 4;
+uniform mat4 finalBonesMatrices[MAX_BONES];
+
 void main()
 {
-    vec4 totalPosition = vec4(0.0f);
+    vec4 totalPosition = vec4(Pos,1.0);
     for(int i = 0 ; i < MAX_BONE_INFLUENCE ; i++)
     {
         if(boneIds[i] == -1) 
@@ -42,7 +42,6 @@ void main()
     }
 
 	gl_Position = Projection * View * Model * totalPosition;
-    gl_Position = Projection * View * Model * vec4(Pos,1.0);
 	FragPos = vec3(Model * vec4(Pos, 1.0));
 	TexPos = Tex;
 	Normal = mat3(transpose(inverse(Model))) * Norm;
