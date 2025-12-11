@@ -32,6 +32,8 @@ ZShader::ZShader(const std::filesystem::path& vertexShaderPath, const std::files
 			std::string name(maxNameLength, '\n');
 			glGetActiveUniform(z_Program, i, maxNameLength, &length, &count, &type, name.data());
 
+			//ZLog.Info("uniform " + name + " found");
+
 			name.resize(length);
 
 			const auto location = glGetUniformLocation(z_Program, name.c_str());
