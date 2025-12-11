@@ -35,7 +35,7 @@ public:
         z_Ship = z_Main.Create3DMeshEntity(ZTransform(Vec3(5.0, 2, 0), Vec3(1.0)), ZModel("Zeus/Resource/Models/SpaceShip", "scene.gltf"), ZShader("Zeus/Resource/Shaders/Lighting/AssimpEADS.vert", "Zeus/Resource/Shaders/Lighting/AssimpEADS.frag", { .Red = -1, .Green = -1, .Blue = -1 }, "", {}, true));
         z_Ship.AddComponent<ZBoxCollider>(ZBoxCollider(Vec3(5.0, 2, 0), Vec3(5)));
 
-        static_cast<ZEntity&>(z_Demon) = z_Main.Create3DMeshEntity(ZTransform(Vec3(-5.0, 2, 0), Vec3(0.0),Vec3(0.025)), ZModel("Zeus/Resource/Models/Demon", "Demon.dae"), ZShader("Zeus/Resource/Shaders/Animation/Animation.vert", "Zeus/Resource/Shaders/Animation/Animation.frag", { .Red = -1, .Green = -1, .Blue = -1 }, "", {}));
+        static_cast<ZEntity&>(z_Demon) = z_Main.Create3DMeshEntity(ZTransform(Vec3(-5.0, 2, 0), Vec3(0.0),Vec3(5)), ZModel("Zeus/Resource/Models/Demon", "Demon.dae"), ZShader("Zeus/Resource/Shaders/Animation/Animation.vert", "Zeus/Resource/Shaders/Animation/Animation.frag", { .Red = -1, .Green = -1, .Blue = -1 }, "", {}));
         z_Demon.AddComponent<ZBoxCollider>(ZBoxCollider(Vec3(5.0, 2, 0), Vec3(5)));
         z_Sprite = z_Main.CreateUiSpriteEntity(ZTransform(Vec3(10.0f, 540.0f, 0.0f), Vec3(270.0f, 0.0f, 0.0f), Vec3(50.0f, 50.0f, 0.0f)), ZSprite(), ZShader("Zeus/Resource/Shaders/Sprites/SpriteColored.vert", "Zeus/Resource/Shaders/Sprites/SpriteColored.frag"));
         z_Text = z_Main.CreateUiTextEntity(ZTransform(Vec3(400, 500, 0)), ZText("Hello World", 20, { .Red = 0.33, .Green = 0.67, .Blue = 0.89 }), ZShader("Zeus/Resource/Shaders/Texts/Text.vert", "Zeus/Resource/Shaders/Texts/Text.frag"));
