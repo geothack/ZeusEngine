@@ -7,13 +7,13 @@ Demon::~Demon()
 
 void Demon::Start()
 {
-	z_DemonSitting = Animation("Zeus/Resource/Models/Demon/Demon.dae", &GetComponent<ZModel>());
-	z_Animator = Animator(&z_DemonSitting);
+	z_DemonSitting = ZAnimation("Zeus/Resource/Models/Demon/Demon.dae", &GetComponent<ZModel>());
+	z_Animator = ZAnimator(&z_DemonSitting);
 }
 
 void Demon::FixedUpdate()
 {
-	
+
 }
 
 void Demon::Update()
@@ -27,7 +27,7 @@ void Demon::Update()
 
 	//glm::mat4 arr[100];
 	//std::copy(transforms.begin(), transforms.end(), arr);
-	
+
 
 	glUniformMatrix4fv(glGetUniformLocation(GetComponent<ZShader>().GetHandle(), "finalBonesMatrices[0]"), transforms.size(), GL_FALSE, glm::value_ptr(transforms[0]));
 

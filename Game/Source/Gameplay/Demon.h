@@ -16,7 +16,7 @@ public:
 
 private:
 
-	Animation z_DemonSitting{};
-	Animator z_Animator{};
+	ZAnimation z_DemonSitting{};
+	ZAnimator z_Animator{};
 };
 
