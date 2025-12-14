@@ -40,7 +40,7 @@ public:
         z_Sprite = z_Main.CreateUiSpriteEntity(ZTransform(Vec3(10.0f, 540.0f, 0.0f), Vec3(270.0f, 0.0f, 0.0f), Vec3(50.0f, 50.0f, 0.0f)), ZSprite(), ZShader("Zeus/Resource/Shaders/Sprites/SpriteColored.vert", "Zeus/Resource/Shaders/Sprites/SpriteColored.frag"));
         z_Text = z_Main.CreateUiTextEntity(ZTransform(Vec3(400, 500, 0)), ZText("Hello World", 20, { .Red = 0.33, .Green = 0.67, .Blue = 0.89 }), ZShader("Zeus/Resource/Shaders/Texts/Text.vert", "Zeus/Resource/Shaders/Texts/Text.frag"));
 
-        
+        z_TerrianShader = ZTessellationShader("Zeus/Resource/Shaders/Terrian/Terrian.vert", "Zeus/Resource/Shaders/Terrian/Terrian.frag", "Zeus/Resource/Shaders/Terrian/Terrian.tcs", "Zeus/Resource/Shaders/Terrian/Terrian.tes");
 
         ZOutput.Load("Shoot", "Zeus/Resource/Sounds/Shoot.wav");
 
@@ -70,7 +70,7 @@ public:
     ZEntity z_Sphere{};
 
 
-    
+    ZTessellationShader z_TerrianShader{};
     
 };
 

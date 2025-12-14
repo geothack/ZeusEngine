@@ -59,3 +59,46 @@ private:
 
     Color z_Color{};
 };
+
+
+class ZTessellationShader
+{
+public:
+    ZTessellationShader() = default;
+
+    ZTessellationShader(const std::filesystem::path& vertexShaderPath, const std::filesystem::path& fragShaderPath, const std::filesystem::path& tscShaderPath, const std::filesystem::path& tesShaderPath);
+
+    void MakeShader(const std::filesystem::path& vertexShaderPath, const std::filesystem::path& fragShaderPath, const std::filesystem::path& tscShaderPath, const std::filesystem::path& tesShaderPath);
+
+    void Attach() const;
+
+public:
+    void SetVec3(std::string_view name, Vec3 value) const;
+
+    void SetMat4(std::string_view name, const Mat4& value) const;
+
+    void SetInt(std::string_view name, int value) const;
+
+    void SetFloat(std::string_view name, float value) const;
+
+public:
+    inline uint32_t GetHandle() const { return z_Program; }
+
+
+private:
+    void Create(uint32_t& shader, const char* path, uint32_t type);
+
+    void LinkShader();
+
+private:
+    uint32_t z_Program{};
+    uint32_t z_Vertex{};
+    uint32_t z_Fragment{};
+    uint32_t z_TessellationControl{};
+    uint32_t z_TesselationEvaluation{};
+
+    int z_Success{};
+    char z_InfoLog[512]{};
+
+    std::unordered_map<std::string, uint32_t> z_UniformCache{};
+};
