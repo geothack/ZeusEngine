@@ -24,7 +24,7 @@ public:
 	virtual ~ZApplication();
 
 	void FixedUpdate();
-	void Update(ZLevel& level, ZCamera& activeCamera, ZSkybox* xkyBox = nullptr);
+	void Update(ZLevel& level, ZCamera& activeCamera);
 
 private:
 	ZWindow z_GameWindow = ZWindow("ZeusEngine", 800, 600);

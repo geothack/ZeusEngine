@@ -20,7 +20,7 @@ void ZApplication::FixedUpdate()
     }
 }
 
-void ZApplication::Update(ZLevel& level, ZCamera& activeCamera, ZSkybox* skyBox)
+void ZApplication::Update(ZLevel& level, ZCamera& activeCamera)
 {
     ZUniforms.Create("Camera", sizeof(CameraData), 0);
     ZUniforms.Update("Camera", 0, glm::value_ptr(z_CameraData.View), sizeof(z_CameraData.View));
@@ -43,7 +43,7 @@ void ZApplication::Update(ZLevel& level, ZCamera& activeCamera, ZSkybox* skyBox)
 
         //z_Ship.GetComponent<ZTransform>().SetPosition(Vec3(glm::sin(currentTime * glm::two_pi<float>() * 0.1) * 15.0, z_Ship.GetPosition().y, z_Ship.GetPosition().z));
 
-        z_Renderer3D.Update(level, activeCamera, skyBox);
+        z_Renderer3D.Update(level, activeCamera);
 
         z_Renderer2D.Update(level);
 

@@ -11,7 +11,7 @@ public:
     Game() 
     {
         Init();
-        ZApplication::Update(z_Main,z_GameCamera,&z_Skybox);
+        ZApplication::Update(z_Main,z_GameCamera);
     }
 
     ~Game()
@@ -35,6 +35,9 @@ public:
         z_Ship = z_Main.Create3DMeshEntity(ZTransform(Vec3(5.0, 2, 0), Vec3(1.0)), ZModel("Zeus/Resource/Models/SpaceShip", "scene.gltf"), ZShader("Zeus/Resource/Shaders/Lighting/AssimpEADS.vert", "Zeus/Resource/Shaders/Lighting/AssimpEADS.frag", { .Red = -1, .Green = -1, .Blue = -1 }, "", {}, true));
         z_Ship.AddComponent<ZBoxCollider>(ZBoxCollider(Vec3(5.0, 2, 0), Vec3(5)));
 
+        z_SkyboxEntity = z_Main.CreateEntity(ZTransform(Vec3(0)));
+        z_SkyboxEntity.AddComponent<ZSkybox>(ZSkybox());
+
         static_cast<ZEntity&>(z_Demon) = z_Main.Create3DMeshEntity(ZTransform(Vec3(-5.0, 2, 0), Vec3(0.0),Vec3(5)), ZModel("Zeus/Resource/Models/Demon", "Demon.dae"), ZShader("Zeus/Resource/Shaders/Animation/Animation.vert", "Zeus/Resource/Shaders/Animation/Animation.frag", { .Red = -1, .Green = -1, .Blue = -1 }, "", {}));
         z_Demon.AddComponent<ZBoxCollider>(ZBoxCollider(Vec3(5.0, 2, 0), Vec3(5)));
         z_Sprite = z_Main.CreateUiSpriteEntity(ZTransform(Vec3(10.0f, 540.0f, 0.0f), Vec3(270.0f, 0.0f, 0.0f), Vec3(50.0f, 50.0f, 0.0f)), ZSprite(), ZShader("Zeus/Resource/Shaders/Sprites/SpriteColored.vert", "Zeus/Resource/Shaders/Sprites/SpriteColored.frag"));
@@ -57,8 +60,6 @@ public:
 
     ZFPSController z_FPSController{};
 
-    ZSkybox z_Skybox{};
-
     ZEntity z_Sprite{};
     ZEntity z_Text{};
 
@@ -68,6 +69,8 @@ public:
     ZEntity z_Cube2{};
     ZEntity z_Plane{};
     ZEntity z_Sphere{};
+
+    ZEntity z_SkyboxEntity{};
 
 
     ZTessellationShader z_TerrianShader{};
