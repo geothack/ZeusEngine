@@ -21,6 +21,9 @@ public:
 
 	aiTextureType GetType() { return z_Type; }
 
+	int GetWidth() const { return z_Width; }
+	int GetHeight() const { return z_Height; }
+
 private:
 	aiTextureType z_Type;
 

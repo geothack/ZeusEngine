@@ -34,24 +34,35 @@ void ZRenderer3D::Update(ZLevel& level, ZCamera& activeCamera)
                 glBindTextureUnit(0, shader.GetTextures()[0].GetHandle());
             }
 
-            if (level.GetRegister().any_of<ZSkybox>(entity))
+           /* if (level.GetRegister().any_of<ZSkybox>(entity))
             {
                 if (shader.SetSky)
                 {
                     shader.SetInt("skybox", 1);
                     glBindTextureUnit(1, level.GetRegister().get<ZSkybox>(entity).GetHandle());
                 }
-            }
+            }*/
             
             model.Render(shader, activeCamera,transform);
         }
     }
 
-    auto view = level.GetRegister().view<ZSkybox>();
-
-    for (auto [entity, skybox] : view.each())
     {
-        skybox.Render(activeCamera);
+        auto view = level.GetRegister().view<ZSkybox>();
+
+        for (auto [entity, skybox] : view.each())
+        {
+            skybox.Render(activeCamera);
+        }
+    }
+
+    {
+        auto view = level.GetRegister().view<ZTerrian>();
+
+        for (auto [entity, terrian] : view.each())
+        {
+            terrian.Render(&activeCamera);
+        }
     }
 
     if (RenderColliders)

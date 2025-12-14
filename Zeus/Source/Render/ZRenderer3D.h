@@ -5,6 +5,7 @@
 #include "Render/ZShader.h"
 #include "Render/ZSkybox.h"
 #include "World/ZLevel.h"
+#include "World/ZTerrian.h"
 
 class ZRenderer3D
 {
