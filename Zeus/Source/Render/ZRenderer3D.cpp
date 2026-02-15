@@ -65,7 +65,7 @@ void ZRenderer3D::Update(ZLevel& level, ZCamera& activeCamera)
         }
     }
 
-    if (RenderColliders)
+    if (!RenderColliders)
     {
         if (Boxes.GetPositions().size() > 0)
         {
